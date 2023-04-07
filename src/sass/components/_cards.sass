@@ -1,0 +1,31 @@
+.card
+    max-width: 25rem
+    margin: auto
+    &:hover .soleil-image
+        transform: rotateZ(45deg) translateX(-3%) translateY(4%)
+.soleil
+    background-color: #2e0604
+    color: goldenrod
+.soleil-image
+    border-radius: 50%
+    animation: pulseSoleil 3s infinite alternate
+    width: 110%
+    height: auto
+    transform: translateX(-5%)
+    transition: 2s
+    perspective: 300px
+    
+.legendary
+    animation: pulseLegendary 3s infinite alternate
+
+@keyframes pulseSoleil
+    0%
+        box-shadow: 0 0 5px #4f0c04
+    100%
+        box-shadow: 0 0 100px #4f0c04
+
+@keyframes pulseLegendary
+    0%
+        box-shadow: 0 0 5px goldenrod
+    100%
+        box-shadow: 0 0 100px goldenrod
