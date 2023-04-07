@@ -22,12 +22,14 @@ export default function SoleilIndex(props) {
       <Hero lien="soleil/soleil-hero.webp" alt={props.data.id} />
       <div className="py-5">
         <Card className="text-center legendary soleil">
-          <Card.Header><h1>{props.data.name}</h1> <Badge bg="warning" text="dark">
+          <Card.Header>
+            <h1>{props.data.name}</h1> 
+            <Badge bg="warning" text="dark">
           LEGENDARY
-        </Badge></Card.Header>
-          <Image alt="soleil" src={soleilImage} className="mx-auto soleil-image" priority />
+        </Badge>
+        </Card.Header>
+          <Image alt="soleil" src={soleilImage} className="mx-auto soleil-image my-3" priority />
           <Card.Body>
-        
             <Card.Text>
               With supporting text below as a natural lead-in to additional
               content. fqqerghrtg erg er terg hth re gr hyr he zrh jyyrt t eztej eyt erzh ryt erzh rrt fezht
