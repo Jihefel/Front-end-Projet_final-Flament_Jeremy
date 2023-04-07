@@ -1,3 +1,4 @@
+
 .card
     max-width: 30rem
     margin: auto
@@ -5,7 +6,9 @@
     &:hover .soleil-image
         transform: rotateZ(45deg)
 .soleil
-    background-color: #2e0604
+    // background-color: #2e0604
+    background: linear-gradient(#2e060400 5%, #2e0604 15% 70%, #2e060462 100%), url(../../../public/assets/images/soleil/sun.jpg)
+    background-position: center
     color: goldenrod
 .soleil-image
     border-radius: 50%
@@ -13,17 +16,37 @@
     // width: 110%
     height: auto
     // transform: translateX(-5%)
-    transition: 2s
+    transition: 3s
     perspective: 300px
-    
-.legendary
-    animation: pulseLegendary 1s infinite alternate
 
-// @keyframes pulseSoleil
-//     0%
-//         box-shadow: 0 0 5px #4f0c04
-//     100%
-//         box-shadow: 0 0 50px #4f0c04
+.legendary
+    position: relative
+    transition: all 0.5s ease-out infinite alternate
+    &::before
+        content: ""
+        width: 104%
+        height: 102%
+        border-radius: 15px
+        position: absolute
+        top: -1%
+        left: -2%
+        animation: spin 2.5s linear infinite
+        z-index: -1
+        background: linear-gradient(-45deg, red, goldenrod, #c8350c , brown )
+        background-size: 400% 400%
+        filter: brightness(150%) blur(5px)
+        animation: animate 2s ease infinite
+        padding-bottom: 100px
+
+@keyframes animate
+    0%
+        background-position: 0% 50%
+
+    50%
+        background-position: 100% 50%
+
+    100%
+        background-position: 0% 50%
 
 @keyframes pulseLegendary
     0%

@@ -3,9 +3,8 @@ import { useRouter } from "next/router";
 import soleilImage from "public/assets/images/soleil/soleil.gif";
 import { useState, useEffect } from "react";
 import { Card, Button, Badge } from "react-bootstrap";
-import { FaEthereum } from "react-icons/fa"
-import Hero from './../../components/common/Hero';
-
+import { FaEthereum } from "react-icons/fa";
+import Hero from "./../../components/common/Hero";
 
 export default function SoleilIndex(props) {
   const router = useRouter();
@@ -16,23 +15,80 @@ export default function SoleilIndex(props) {
     setPrice(Math.random().toFixed(4));
   }, []);
 
-
   return (
     <>
       <Hero lien="soleil/soleil-hero.webp" alt={props.data.id} />
       <div className="py-5">
         <Card className="text-center legendary soleil">
           <Card.Header>
-            <h1>{props.data.name}</h1> 
-            <Badge bg="warning" text="dark">
-          LEGENDARY
-        </Badge>
-        </Card.Header>
-          <Image alt="soleil" src={soleilImage} className="mx-auto soleil-image my-3" priority />
+            <h1>{props.data.name}</h1>
+            <Badge bg="warning" text="dark" className="mb-3">
+              LEGENDARY
+            </Badge>
+          </Card.Header>
+          <div className="fire">
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+    <div className="particle"></div>
+</div>
+          <Image
+            alt="soleil"
+            src={soleilImage}
+            className="mx-auto soleil-image my-3"
+            priority
+          />
           <Card.Body>
             <Card.Text>
               With supporting text below as a natural lead-in to additional
-              content. fqqerghrtg erg er terg hth re gr hyr he zrh jyyrt t eztej eyt erzh ryt erzh rrt fezht
+              content. fqqerghrtg erg er terg hth re gr hyr he zrh jyyrt t eztej
+              eyt erzh ryt erzh rrt fezht
             </Card.Text>
             <Button
               variant="primary"
@@ -42,7 +98,12 @@ export default function SoleilIndex(props) {
             </Button>
           </Card.Body>
           <Card.Footer className="text-muted">
-          {price}<FaEthereum />  {(props.dataEth.data[0].quote.EUR.price.toFixed(2) * price).toFixed(2)} €
+            {price}
+            <FaEthereum />{" "}
+            {(props.dataEth.data[0].quote.EUR.price.toFixed(2) * price).toFixed(
+              2
+            )}{" "}
+            €
           </Card.Footer>
         </Card>
       </div>
