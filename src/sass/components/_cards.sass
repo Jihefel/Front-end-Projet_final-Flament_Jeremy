@@ -2,7 +2,7 @@
     width: 32rem
     overflow: hidden
     place-self: center
-    animation: pulseLegendary 2s infinite alternate
+    animation: pulseLegendary 1s infinite alternate
     height: 57rem
     display: grid
     border-radius: 15px
@@ -21,26 +21,31 @@
             z-index: -1
             background: linear-gradient(#c8350c 30%, #f4d96c 60% 100%)
             background-position: center
-            animation: animate 2s linear infinite
+            animation: animate 1.5s linear infinite
             padding-bottom: 100px
-            filter: blur(2px)
 .card
     max-width: 31rem
     border-radius: 10px!important
     background: linear-gradient(#2e0604, black)
     height: fit-content
     .button-details
-        margin-top: 30px
         background: linear-gradient(#00000070, #00000070), url(../../../public/assets/images/soleil/soleil.gif)
-        background-position: center
         background-size: 200%
         border: none
         color: white
+        background-position: top
         transition: 0.3s
         padding-inline: 1rem
+        margin-block: 15px
+        box-shadow: 0 0 70px #c8350c
         &:hover
+            background-position: center
             background-size: 350%
             transform: scale(1.05)
+            filter: brightness(300%)
+            color: black
+            text-shadow: 0 0 3px black
+            box-shadow: 0 0 100px #ffd739
     .button-ajouter
         background: #710f04
         color: #f4d96c
@@ -57,15 +62,10 @@
         align-items: center
         justify-content: center
         .titre
-            background: url(../../../public/assets/images/soleil/soleil.gif)
-            -webkit-background-clip: text
-            background-clip: text
-            background-position: center
-            color: transparent!important
+            @include flammesTitre
             width: fit-content
             margin: auto
             margin-bottom: 1rem
-            filter: drop-shadow(0 0 2px white)
         .badge
             background: url(../../../public/assets/images/gold.gif)
             background-position: bottom
@@ -96,6 +96,9 @@
 
 @keyframes pulseLegendary
     0%
-        box-shadow: 0 0 10px #9b550e
+        box-shadow: 0 0 10px #c8350c
     100%
-        box-shadow: 0 0 80px #9b550e
+        box-shadow: 0 0 80px #c07f1e
+
+
+      

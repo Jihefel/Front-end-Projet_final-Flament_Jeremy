@@ -21,9 +21,9 @@ export default function SoleilIndex(props) {
 
   return (
     <section>
-      <Hero lien="soleil/soleil-hero.webp" alt="Soleil" />
-      <h1 className="titre-sec">Le Soleil</h1>
-      <p className="p-sec">La carte NFT du Soleil est une représentation unique et authentique de notre étoile la plus proche. Avec ses couleurs vibrantes et sa forme caractéristique, cette carte est un véritable chef-d'œuvre numérique. Chaque détail a été minutieusement capturé pour donner vie à cette œuvre d'art numérique. En tant que propriétaire de cette carte NFT, vous aurez non seulement un accès exclusif à cette œuvre d'art, mais vous serez également l'un des seuls à posséder une partie de l'histoire de l'exploration spatiale.</p>
+      <Hero lien="space.jpg" alt="Soleil" />
+      <h1 className="titre-sec-soleil titre">Le Soleil</h1>
+      <p className="p-sec-soleil">La carte NFT du Soleil est une représentation unique et authentique de notre étoile la plus proche. Avec ses couleurs vibrantes et sa forme caractéristique, cette carte est un véritable chef-d'œuvre numérique. Chaque détail a été minutieusement capturé pour donner vie à cette œuvre d'art numérique. En tant que propriétaire de cette carte NFT, vous aurez non seulement un accès exclusif à cette œuvre d'art, mais vous serez également l'un des seuls à posséder une partie de l'histoire de l'exploration spatiale.</p>
       <div className={"my-5 soleil-wrapper"}>
         <Card className="text-center legendary soleil">
           <Card.Header className="mb-3">
@@ -41,13 +41,15 @@ export default function SoleilIndex(props) {
             <Card.Text className="mt-2">
             Le soleil, astre de feu, source de vie et de lumière, règne en maître dans notre système solaire. Il brille de mille feux, réchauffant les cœurs et éclairant les esprits. Tel un joyau céleste, il illumine notre univers et guide nos pas sur le chemin de la découverte.
             </Card.Text>
-            <Button
-              variant="primary"
-              onClick={() => router.push(`${router.pathname}/${props.data.id}`)}
-              className="button-details"
-            >
-              Découvrir {props.data.name.at(0).toLowerCase() + props.data.name.substring(1)}
-            </Button>
+            <div className="button-bg">
+              <Button
+                variant="primary"
+                onClick={() => router.push(`${router.pathname}/${props.data.id}`)}
+                className="button-details"
+              >
+                Découvrir {props.data.name.at(0).toLowerCase() + props.data.name.substring(1)}
+              </Button>
+            </div>
           </Card.Body>
           <Card.Footer className="text-white d-flex align-items-center justify-content-between py-4">
             <Button className="button-ajouter">
