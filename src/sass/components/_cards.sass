@@ -1,55 +1,101 @@
-
+.soleil-wrapper
+    width: 32rem
+    overflow: hidden
+    place-self: center
+    animation: pulseLegendary 2s infinite alternate
+    height: 57rem
+    display: grid
+    border-radius: 15px
+    .legendary
+        position: relative
+        margin: auto
+        &::before
+            content: ""
+            width: 210%
+            height: 210%
+            border: 1px solid #c8350c
+            border-radius: 50%
+            position: absolute
+            top: -55%
+            left: -55%
+            z-index: -1
+            background: linear-gradient(#c8350c 30%, #f4d96c 60% 100%)
+            background-position: center
+            animation: animate 2s linear infinite
+            padding-bottom: 100px
+            filter: blur(2px)
 .card
-    max-width: 30rem
-    margin: auto
+    max-width: 31rem
     border-radius: 10px!important
-    &:hover .soleil-image
-        transform: rotateZ(45deg)
+    background: linear-gradient(#2e0604, black)
+    height: fit-content
+    .button-details
+        margin-top: 30px
+        background: linear-gradient(#00000070, #00000070), url(../../../public/assets/images/soleil/soleil.gif)
+        background-position: center
+        background-size: 200%
+        border: none
+        color: white
+        transition: 0.3s
+        padding-inline: 1rem
+        &:hover
+            background-size: 350%
+            transform: scale(1.05)
+    .button-ajouter
+        background: #710f04
+        color: #f4d96c
+        border: none
+        transition: all 0.4s ease-in-out
+        &:hover
+            background: #f4d96c
+            color: #2e0604
+
+    .card-header
+        background: linear-gradient(to bottom, #2e0604 30%, transparent)
+        border-bottom: none
+        display: flex
+        align-items: center
+        justify-content: center
+        .titre
+            background: url(../../../public/assets/images/soleil/soleil.gif)
+            -webkit-background-clip: text
+            background-clip: text
+            background-position: center
+            color: transparent!important
+            width: fit-content
+            margin: auto
+            margin-bottom: 1rem
+            filter: drop-shadow(0 0 2px white)
+        .badge
+            background: url(../../../public/assets/images/gold.gif)
+            background-position: bottom
+            background-size: cover
+            color: white
+            text-shadow: 0 0 2px black
+            right: 10px
+            box-shadow: 0 0 20px #f4d96c
 .soleil
-    // background-color: #2e0604
-    background: linear-gradient(#2e060400 5%, #2e0604 15% 70%, #2e060462 100%), url(../../../public/assets/images/soleil/sun.jpg)
-    background-position: center
-    color: goldenrod
+    background: url(../../../public/assets/images/soleil/soleil.gif), linear-gradient(to bottom, transparent, #2e0604 60% 100%)
+    background-size: 120%
+    background-position: 50% 10%
+    background-repeat: no-repeat
+    color: #f4d96c
 .soleil-image
     border-radius: 50%
     box-shadow: 0 0 50px #4f0c04
-    // width: 110%
     height: auto
-    // transform: translateX(-5%)
     transition: 3s
-    perspective: 300px
-
-.legendary
-    position: relative
-    transition: all 0.5s ease-out infinite alternate
-    &::before
-        content: ""
-        width: 104%
-        height: 102%
-        border-radius: 15px
-        position: absolute
-        top: -1%
-        left: -2%
-        animation: spin 2.5s linear infinite
-        z-index: -1
-        background: linear-gradient(-45deg, red, goldenrod, #c8350c , brown )
-        background-size: 400% 400%
-        filter: brightness(150%) blur(5px)
-        animation: animate 2s ease infinite
-        padding-bottom: 100px
+    opacity: 0
 
 @keyframes animate
     0%
-        background-position: 0% 50%
-
-    50%
-        background-position: 100% 50%
+        transform: rotateZ(0deg)
 
     100%
-        background-position: 0% 50%
+        transform: rotateZ(360deg)
 
 @keyframes pulseLegendary
     0%
-        box-shadow: 0 0 10px goldenrod
+        box-shadow: 0 0 10px #9b550e
     100%
-        box-shadow: 0 0 30px goldenrod
+        box-shadow: 0 0 80px #9b550e

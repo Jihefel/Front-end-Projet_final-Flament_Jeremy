@@ -1,10 +1,16 @@
 import Link from "next/link";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { Titillium_Web } from 'next/font/google'
+
+const titillium = Titillium_Web({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 function NavBar() {
   return (
     <>
-      <Navbar bg="light" expand="md">
+      <Navbar bg="light" expand="md" className={titillium.className}>
         <Container>
           <Navbar.Brand href="#">PlaNFT</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
