@@ -15,8 +15,8 @@ export default function Layout(props) {
       <NavBar />
       <main className={titillium.className}>
         <Container>
-        {props.children}
-      </Container>
+          {props.children}
+        </Container>
       </main>
     </>
   )

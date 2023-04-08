@@ -51,7 +51,7 @@ export default function SoleilIndex(props) {
           </Card.Body>
           <Card.Footer className="text-white d-flex align-items-center justify-content-between py-4">
             <Button className="button-ajouter">
-              <MdAddShoppingCart /> Ajouter au panier
+              <MdAddShoppingCart /> Acheter
             </Button>
             <div className="d-flex align-items-center justify-content-center gap-3">
               <h3 className="d-flex align-items-center justify-content-center m-0">{price} <FaEthereum /></h3>
