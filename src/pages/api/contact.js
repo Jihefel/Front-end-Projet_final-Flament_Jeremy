@@ -12,11 +12,10 @@ export default function handler(request, response) {
 
   } else if (request.method === "POST") {
 
-    const newName = request.body.name;
-    const newPhone = request.body.phone;
     const newEmail = request.body.email;
+    const newPassword = request.body.password;
 
-    const newContact = { name: newName, phone: newPhone, email: newEmail };
+    const newAccount = { name: newName, phone: newPhone, email: newEmail };
 
     const filePath = path.join(process.cwd(), "src", "data", "contacts.json");
     const fileData = fs.readFileSync(filePath);

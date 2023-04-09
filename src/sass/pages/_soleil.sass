@@ -1,9 +1,139 @@
+.soleil-wrapper
+    width: 32rem
+    overflow: hidden
+    place-self: center
+    animation: pulseLegendary 1s infinite alternate
+    height: 57rem
+    display: grid
+    border-radius: 15px
+    z-index: 1
+    .legendary
+        position: relative
+        margin: auto
+        &::before
+            content: ""
+            width: 210%
+            height: 210%
+            border: 1px solid #c8350c
+            border-radius: 50%
+            position: absolute
+            top: -55%
+            left: -55%
+            z-index: -1
+            background: linear-gradient(#c8350c 30%, #f4d96c 60% 100%)
+            background-position: center
+            animation: animate 1.5s linear infinite
+            padding-bottom: 100px
+.card
+    max-width: 31rem
+    border-radius: 10px!important
+    background: linear-gradient(#2e0604, black)
+    height: fit-content
+    &:hover 
+        background-size: 140%
+        background-position: 50% 0%
+    .card-text
+        display: block
+        text-align: center
+        margin-bottom: 1em
+        margin-inline: 0
+        background: url(../../../public/assets/images/soleil/soleil.gif)
+        -webkit-background-clip: text
+        background-clip: text
+        background-size: 150%
+        background-position: 80% 50%
+        filter: brightness(300%)
+        color: transparent!important
+
+    .card-header
+        background: linear-gradient(to bottom, #2e0604 30%, transparent)
+        border-bottom: none
+        display: flex
+        align-items: center
+        justify-content: center
+        .titre
+            @include flammesTitre
+            width: fit-content
+            margin: auto
+            margin-bottom: 1rem
+        .badge
+            background: url(../../../public/assets/images/gold.gif)
+            background-position: bottom
+            background-size: cover
+            color: white
+            text-shadow: 0 0 2px black
+            right: 15px
+            box-shadow: 0 0 20px #f4d96c
+    .prix
+        font-size: 1.3em
+        margin-top: 1em
+        margin-bottom: 1em
+        margin-left: 0
+        margin-right: 0
+        font-weight: bold
+.button-details
+    @include boutonSoleil
+    &:hover
+        background-position: center
+        background-size: 350%
+        transform: scale(1.05)
+        filter: brightness(300%)
+        color: black
+        text-shadow: 0 0 3px black
+        box-shadow: 0 0 100px #ffd739
+.button-ajouter
+    background: #710f04
+    color: #f4d96c
+    border: none
+    transition: all 0.4s ease-in-out
+    &:hover
+        background: #f4d96c
+        color: #2e0604
+.soleil
+    background: url(../../../public/assets/images/soleil/soleil.gif), linear-gradient(to bottom, transparent, #2e0604 60% 100%)
+    background-size: 120%
+    background-position: 50% 10%
+    background-repeat: no-repeat
+    color: #f4d96c
+    transition: 2s
+.soleil-image
+    border-radius: 50%
+    box-shadow: 0 0 50px #4f0c04
+    height: auto
+    transition: 3s
+    opacity: 0
+.zoom
+    background: url(../../../public/assets/images/soleil/soleil.gif), linear-gradient(to bottom, transparent, #2e0604 60% 100%)
+    background-position: 50% 80%
+    background-repeat: no-repeat
+    color: #f4d96c
+    background-size: 200%!important
+    transition: 2s
+
+@keyframes animate
+    0%
+        transform: rotateZ(0deg)
+
+    100%
+        transform: rotateZ(360deg)
+
+@keyframes pulseLegendary
+    0%
+        box-shadow: 0 0 10px #c8350c
+    100%
+        box-shadow: 0 0 80px #c07f1e
+
+
 
 .titre-sec-soleil
     @include flammesTitre
+    font-size: 4rem
 .p-sec-soleil
     color: white
-
-
-        
-        
+    display: block
+    text-align: center
+    font-size: 1.2em
+    line-height: 2.5rem
+    margin-top: 1em
+    margin-bottom: 3em
+    margin-inline: 0
