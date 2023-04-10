@@ -1,0 +1,45 @@
+.planetes
+    .titre-planetes
+        display: block
+        font-size: 3.5em
+        margin-block: 0.67em
+        margin-inline: 0
+        font-weight: bold
+        background-image: url(../../../public/assets/images/earth-2768_256.gif)
+        background-clip: text
+        background-position: center
+        background-size: 120%
+        color: transparent!important
+        filter: drop-shadow(0 0 2px #222222)
+    .image-planete
+        height: 17dvh
+    a[href$="mercure"]
+        order: -8
+    a[href$="venus"]
+        order: -7
+    a[href$="terre"]
+        order: -6
+    a[href$="mars"]
+        order: -5  
+    a[href$="jupiter"]
+        order: -4
+    a[href$="saturne"]
+        order: -3
+    a[href$="uranus"]
+        order: -2
+    a[href$="neptune"]
+        order: -1
+    a
+        transition: 0.3s
+        img
+            transition: 0.3s
+        &:hover 
+            transform: scale(1.02)
+            filter: drop-shadow(0 0 10px #ffffff57)
+            img
+                transform: scale(1.05)
+        &:active
+            transform: scale(0.98)!important
+            img
+                transform: scale(1.2)
+    

@@ -29,10 +29,10 @@ function NavBar() {
         <Navbar.Collapse className="flex items-center justify-between gap-5">
           <Link href="/" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiAstronautHelmet />Accueil</Link>
           <Link href="/etoiles" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiSun />Le Soleil</Link>
-          <Link href="/navbars" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiRingedPlanet />Les planètes</Link>
-          <Link href="/navbars" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiPlanetConquest />Les planètes naines</Link>
-          <Link href="/navbars" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiMoonOrbit />Les lunes</Link>
-          <Link href="/navbars" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiSpaceNeedle />Contact</Link>
+          <Link href="/planetes" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiRingedPlanet />Les planètes</Link>
+          <Link href="/planetes-naines" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiPlanetConquest />Les planètes naines</Link>
+          <Link href="/lunes" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiMoonOrbit />Les lunes</Link>
+          <Link href="/contact" className="inline-flex items-center py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 md:border-0 text-white gap-1"><GiSpaceNeedle />Contact</Link>
         </Navbar.Collapse>
         <div className="connection-wrapper flex items-center justify-between">
           <Link

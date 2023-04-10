@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Gallery from "@/components/Gallery";
+import Loader from "@/components/common/Loader";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -8,7 +9,7 @@ function Home(props) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <h1 className="text-white text-5xl">Chargement...</h1>;
+    return <Loader />;
   }
   
   return (
@@ -32,11 +33,20 @@ export async function getStaticProps() {
   );
   const dataPlanetes = await responsePlanetes.json();
 
-  const responsePlanetesNaines = await fetch(
+  // Obtenir les données de tous les corps de type "Dwarf"
+  const responseDwarfBodies = await fetch(
     `https://api.le-systeme-solaire.net/rest/bodies?filter[]=bodyType,sw,Dwarf`
   );
+  const dwarfBodies = await responseDwarfBodies.json();
 
-  const dataPlanetesNaines = await responsePlanetesNaines.json();
+  // Obtenir les données de Cérès séparément
+  const responseCeres = await fetch(
+    "https://api.le-systeme-solaire.net/rest/bodies/ceres"
+  );
+  const ceres = await responseCeres.json();
+
+  // Ajouter Cérès à la liste des planètes naines
+  const dataPlanetesNaines = { bodies: [...dwarfBodies.bodies, ceres] };
 
   return {
     props: { dataPlanetes, dataPlanetesNaines },
