@@ -9,11 +9,11 @@ body
   min-height: 100dvh
   background-image: url(../../../public/assets/images/space.jpg)
   background-size: cover
-  #__next
-    height: calc(100% - 56px)
-    main
+#__next
+  height: calc(100dvh - 104px)
+  main
+    display: grid
+    height: 100%
+    backdrop-filter: blur(3px)
+    .container, .container section
       display: grid
-      place-items: center
-      height: 100%
-      .container, .container section
-        display: grid

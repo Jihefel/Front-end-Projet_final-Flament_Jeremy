@@ -2,11 +2,12 @@
     width: 32rem
     overflow: hidden
     place-self: center
-    animation: pulseLegendary 1s infinite alternate
     height: 57rem
     display: grid
     border-radius: 15px
     z-index: 1
+    perspective: 1500px
+    transform-style: preserve-3d
     .legendary
         position: relative
         margin: auto
@@ -29,7 +30,7 @@
     border-radius: 10px!important
     background: linear-gradient(#2e0604, black)
     height: fit-content
-    &:hover 
+    &:hover
         background-size: 140%
         background-position: 50% 0%
     .card-text
@@ -109,6 +110,20 @@
     color: #f4d96c
     background-size: 200%!important
     transition: 2s
+.titre-sec-soleil
+    @include flammesTitre
+    font-size: 4rem
+.p-sec-soleil
+    color: white
+    display: block
+    text-align: center
+    font-size: 1.2em
+    line-height: 2.5rem
+    margin-top: 1em
+    margin-bottom: 3em
+    margin-inline: 0
+.rotate
+    animation: pulseLegendary 1s infinite alternate, rotate 3s ease-out
 
 @keyframes animate
     0%
@@ -123,17 +138,9 @@
     100%
         box-shadow: 0 0 80px #c07f1e
 
-
-
-.titre-sec-soleil
-    @include flammesTitre
-    font-size: 4rem
-.p-sec-soleil
-    color: white
-    display: block
-    text-align: center
-    font-size: 1.2em
-    line-height: 2.5rem
-    margin-top: 1em
-    margin-bottom: 3em
-    margin-inline: 0
+@keyframes rotate
+    0%
+        transform: rotateY(0deg) scale(0)
+    100%
+        transform: rotateY(1080deg) scale(1)
+        

@@ -1,3 +1,82 @@
+.gallery
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  height: calc( 100dvh - 104px )
+  max-width: 100%
+  overflow: hidden
+  background-color: black
+  .image-container, [data-testid="carousel"] a, figure
+    height: 100%
+    &:hover
+      .direction-carousel
+        opacity: 100%!important
+        text-shadow: 0 0 10px black
+        pointer-events: none
 
-  h1
-    // color: $primary-color
+  [data-testid="carousel-right-control"], [data-testid="carousel-left-control"]
+    font-size: 2rem
+    color: #ffffff3f
+    transition: 0.3s
+    &:hover
+      .direction-carousel
+        opacity: 100%!important
+        text-shadow: 0 0 10px black
+  [data-testid="carousel-left-control"]
+    transform: rotateZ(180deg)
+
+  & img
+    object-fit: cover
+    object-position: 30% 50%
+    height: 100%
+    transition: all 0.7s ease
+    &:hover
+      z-index: 1
+      position: relative
+      box-shadow: 0 0 20px black
+      cursor: pointer
+      object-position: center
+    &:not(:hover)
+      filter: brightness(0.3)
+      animation: mouvement 15s infinite alternate
+  [data-testid="carousel"], .img-hors-carousel
+    transition: 0.3s ease-in
+    &:hover
+      transform: scale(1.1)
+      z-index: 1
+      position: relative
+      box-shadow: 0 0 20px black
+      cursor: pointer
+      object-position: center
+      img
+        filter: brightness(1)
+      [data-testid="carousel-right-control"], [data-testid="carousel-left-control"]
+        color: #fff
+        filter: drop-shadow(0 0 1px black)
+        animation: arrowEffect 1s infinite ease-in-out
+        &:hover
+          font-size: 3rem
+        &:active
+          font-size: 1.5rem
+  figcaption
+    bottom: 10%
+    left: 50%
+    font-size: 2rem
+    transform: translateX(-50%)
+    z-index: 10
+    filter: drop-shadow(0 0 3px black)
+    
+      
+
+@keyframes mouvement
+  0%
+    object-position: center
+  50%
+    object-position: 46% 50%
+  100%
+    object-position: 54% 50%
+
+@keyframes arrowEffect
+  0%
+    filter: drop-shadow(2px 0px rgba(110, 110, 110, 0.185))
+  100% 
+    filter: drop-shadow(15px 0px rgba(0,0,0,0.4))

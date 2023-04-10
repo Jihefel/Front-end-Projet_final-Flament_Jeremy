@@ -36,13 +36,13 @@ function NavBar() {
         </Navbar.Collapse>
         <div className="connection-wrapper flex items-center justify-between">
           <Link
-            href="#"
+            href="/connexion"
             className="text-white dark:text-white hover:text-black focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:text-gray-700 focus:outline-none dark:focus:ring-gray-800"
           >
             Se connecter
           </Link>
           <Link
-            href="inscription"
+            href="/inscription"
             className="text-white bg-blue-700 hover:text-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:text-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             S&apos;inscrire
