@@ -1,7 +1,7 @@
 
 
 function PlanetesSlug() {
-    return (  );
+    return ( <></> );
 }
 
 export default PlanetesSlug;

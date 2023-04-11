@@ -54,7 +54,7 @@ export async function getStaticProps() {
   const ceres = await responseCeres.json();
 
   // Ajouter Cérès à la liste des planètes naines
-  const dataPlanetesNaines = { bodies: dwarfBodies.bodies.concat(ceres) };
+  const dataPlanetesNaines = { bodies: [...dwarfBodies.bodies, ceres] };
 
   return {
     props: { dataPlanetesNaines },

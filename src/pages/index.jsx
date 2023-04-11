@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import Gallery from "@/components/Gallery";
+import GalleryHome from "@/components/GalleryHome";
 import Loader from "@/components/common/Loader";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ function Home(props) {
         <title>Exo Next</title>
       </Head>
      
-      <Gallery dataPlanetes={props.dataPlanetes.bodies} dataPlanetesNaines={props.dataPlanetesNaines.bodies} />
+      <GalleryHome dataPlanetes={props.dataPlanetes.bodies} dataPlanetesNaines={props.dataPlanetesNaines.bodies} />
       
     </>
   );

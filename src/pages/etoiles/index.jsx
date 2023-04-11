@@ -60,6 +60,7 @@ export default function SoleilIndex(props) {
         </p>
         {isUnveiled ? (
           <>
+          <div ref={pageEndRef} />
             <div className={"my-5 soleil-wrapper" + (isUnveiled ? " rotate" : "") }>
               <Card
                 className={
@@ -122,7 +123,6 @@ export default function SoleilIndex(props) {
                 </Card.Footer>
               </Card>
             </div>
-            <div ref={pageEndRef} />
           </>
         ) : (
           <div className="devoiler mx-auto my-60">

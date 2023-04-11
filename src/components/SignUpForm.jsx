@@ -70,7 +70,7 @@ export default function SignUpForm() {
   return (
     <>
       <form
-        className="flex flex-col gap-4 mx-48 my-60 formulaire-inscription"
+        className="flex flex-col gap-4 mx-48 mt-14 formulaire-inscription"
         onSubmit={handleSubmit}
       >
         <div>

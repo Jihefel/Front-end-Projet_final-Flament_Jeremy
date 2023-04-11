@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from '@/components/common/Navbar';
+import Footer from '@/components/common/Footer';
 import { Titillium_Web } from 'next/font/google'
 
 const titillium = Titillium_Web({
@@ -15,6 +16,7 @@ export default function Layout(props) {
       <main className={titillium.className}>
           {props.children}
       </main>
+      <Footer />
     </>
   )
 }

@@ -3,6 +3,8 @@
         "prenom": "Jérémy",
         "nom": "Flament",
         "email": "jfl.jflament@gmail.com",
-        "password": "$2b$10$gjROJg4g0nteFmzUiw/6VuBZCvStSqduhuD4eu3zZR.JnBlP6lPUK"
+        "password": "$2b$10$WWY08tLW3eaqqmG0xa5VnukxsGAXNScA9dkN34klYoxkGq2eH5Wxe",
+        "isConnected": false,
+        "message": {}
     }
 ]

@@ -1,0 +1,50 @@
+.section-lunes
+    .gallery
+        display: flex
+        flex-direction: column
+        overflow: hidden
+        background-color: red
+        height: fit-content
+        a
+            .image-container
+                
+                width: 100%
+                figure
+                    height: 100%
+
+            & img
+                object-fit: cover
+                object-position: 50% 30%
+                max-height: 300px
+                width: 100%
+                transition: all 0.7s ease
+                animation: mouvement2 20s infinite alternate
+                &:hover
+                    z-index: 1
+                    position: relative
+                    box-shadow: 0 0 20px black
+                    cursor: pointer
+                    // object-position: 50
+                &:not(:hover)
+                    filter: brightness(0.3)
+        figcaption
+            bottom: 10%
+            left: 50%
+            font-size: 2rem
+            transform: translateX(-50%)
+            z-index: 10
+            filter: drop-shadow(0 0 3px black)
+
+@keyframes mouvement2
+    0%
+        object-position: center
+    50%
+        object-position: 50% 20%
+    100%
+        object-position: 50% 40%
+
+@keyframes arrowEffect
+    0%
+        filter: drop-shadow(2px 0px rgba(110, 110, 110, 0.185))
+    100%
+        filter: drop-shadow(15px 0px rgba(0,0,0,0.4))

@@ -47,7 +47,9 @@ export default function handler(request, response) {
         prenom: prenom,
         nom: nom,
         email: email,
-        password: hash, // Stocke le mot de passe haché
+        password: hash,// Stocke le mot de passe haché
+        isConnected: false,
+        message: {} 
       };
 
       data.push(newAccount);

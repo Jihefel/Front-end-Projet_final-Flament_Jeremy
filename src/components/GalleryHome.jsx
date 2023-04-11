@@ -14,7 +14,7 @@ importAll(
   require.context("../../public/assets/images", true, /\.(png|jpe?g|svg|webp)$/)
 );
 
-function Gallery(props) {
+function GalleryHome(props) {
   return (
     <div className="gallery">
       <Link href={"/etoiles"}>
@@ -98,4 +98,4 @@ function Gallery(props) {
   );
 }
 
-export default Gallery;
+export default GalleryHome;

@@ -29,6 +29,7 @@
     object-position: 30% 50%
     height: 100%
     transition: all 0.7s ease
+    animation: mouvement 15s infinite alternate
     &:hover
       z-index: 1
       position: relative
@@ -37,7 +38,6 @@
       object-position: center
     &:not(:hover)
       filter: brightness(0.3)
-      animation: mouvement 15s infinite alternate
   [data-testid="carousel"], .img-hors-carousel
     transition: 0.3s ease-in
     &:hover
