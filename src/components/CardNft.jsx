@@ -23,6 +23,8 @@ function CardNft(props) {
   const router = useRouter();
   const [price, setPrice] = useState(null);
 
+
+  console.log(router)
   // Prix de la carte random
   useEffect(() => {
     setPrice(Math.random().toFixed(5));
@@ -30,22 +32,22 @@ function CardNft(props) {
   
   return (
       <div className="card-wrapper">
-        <Card className={'text-center card-nft ' +  (props.rarity === "lunaire" ? "bg-gradient-to-bl from-black to-zinc-700" : props.rarity === "commun" ? "dark" : "")}>
+        <Card className={'text-center card-nft ' +  (props.rarity === "lunaire" ? "bg-gradient-to-bl from-black to-zinc-700" : props.rarity === "planétaire" ? "bg-gradient-to-bl from-blue-500 to-emerald-700" : "bg-gradient-to-bl from-gray-300 to-amber-950")}>
           <Card.Header className="mb-3">
             <h1 className="titre my-2 lunes">{props.data.name}</h1>
             <Badge
-              color={props.rarity === "lunaire" ? "dark" : props.rarity === "commun" ? "dark" : ""}
-              className="my-2 position-absolute uppercase"
+              color={props.rarity === "lunaire" ? "dark" : props.rarity === "planétaire" ? "success" : "failure"}
+              className="my-2 uppercase absolute"
             >
               {props.rarity}
             </Badge>
           </Card.Header>
           <Image src={
-              images[`./lunes/${props.data.aroundPlanet.planet}/${props.data.id}.jpg`] ||
-              images[`./lunes/${props.data.aroundPlanet.planet}/${props.data.id}.jpeg`] ||
-              images[`./lunes/${props.data.aroundPlanet.planet}/${props.data.id}.png`] ||
-              images[`./lunes/${props.data.aroundPlanet.planet}/${props.data.id}.svg`] ||
-              images[`./lunes/${props.data.aroundPlanet.planet}/${props.data.id}.webp`]
+              images[`.${router.asPath}.jpg`] ||
+              images[`.${router.asPath}.jpeg`] ||
+              images[`.${router.asPath}.png`] ||
+              images[`.${router.asPath}.svg`] ||
+              images[`.${router.asPath}.webp`]
             } 
             alt={props.data.id} className="" 
           />

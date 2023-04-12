@@ -21,7 +21,6 @@ importAll(
 
 function LunesIndex(props) {
   const data = Object.values(props);
-  console.log(data)
 
   const lunes = data.flatMap((planeteParente, index) =>
     planeteParente.bodies.map((lune) => lune.aroundPlanet.planet)
@@ -29,8 +28,6 @@ function LunesIndex(props) {
 
   //NOTE - En JavaScript, set est une structure de données qui représente une collection d'éléments uniques. Cela signifie que chaque élément ne peut être présent qu'une seule fois dans le set. Le type de données des éléments stockés dans un set peut être n'importe quoi: chaînes de caractères, nombres, objets, etc.
   const planetesUniques = [...new Set(lunes)];
-
-  console.log(planetesUniques);
 
   const router = useRouter();
 
@@ -46,22 +43,8 @@ function LunesIndex(props) {
       <Container>
         <h1 className="titre-planetes-naines">Les lunes</h1>
       </Container>
-      {/* <Accordion collapseAll={true} alwaysOpen={true}> */}
       <div className="gallery">
         {planetesUniques.map((planete, index) => (
-          // <Accordion.Panel key={index}>
-          //   <Accordion.Title>{planete.toUpperCase()}</Accordion.Title>
-          //   <Accordion.Content>
-          //     <div className="mx-auto max-w-2xl lg:max-w-full w-full">
-          //       <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 sm:grid-cols-1 xl:gap-x-24 w-full">
-          //         <PreviewBody
-          //           dataTypeDeCorps={data[index]}
-          //           lienTypeDeCorps={`lunes/${planete}`}
-          //         />
-          //       </div>
-          //     </div>
-          //   </Accordion.Content>
-          // </Accordion.Panel>
           <Link href={router.pathname + "/" + planete} key={planete}>
             <div className="image-container relative">
               <figure>
@@ -88,7 +71,6 @@ function LunesIndex(props) {
           </Link>
         ))}
       </div>
-      {/* </Accordion> */}
     </section>
   );
 }

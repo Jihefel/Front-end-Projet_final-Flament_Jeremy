@@ -1,27 +1,29 @@
 import Link from "next/link";
 import { getMoons } from "./[planetes]";
 import { useRouter } from "next/router";
-import { Col, Row, Container } from 'react-bootstrap';
+import { Col, Row, Container } from "react-bootstrap";
 import Image from "next/image";
 import CardNft from "@/components/CardNft";
 
-
-
-
 function Lunes(props) {
-const router = useRouter()
-const data = props.luneActuelle
+  const router = useRouter();
+  const data = props.luneActuelle;
 
-let dateOptions = {weekday: "long", year: "numeric", month: "long", day: "numeric"}
+  let dateOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
 
-    return ( 
-        <>
-        <section className="py-5 section-lunes-details">
-      <Container>
-        <h1 className="titre-sec-lunes titre">{data.name}</h1>
-        <Row>
-          <Col sm={4}>
-            {/* <Image src={
+  return (
+    <>
+      <section className="py-5 section-lunes-details">
+        <Container>
+          <h1 className="titre-sec-lunes titre">{data.name}</h1>
+          <Row>
+            <Col sm={4}>
+              {/* <Image src={
                     images[`./lunes/${data.aroundPlanet.planet}/${data.id}.jpg`] ||
                     images[`./lunes/${data.aroundPlanet.planet}/${data.id}.jpeg`] ||
                     images[`./lunes/${data.aroundPlanet.planet}/${data.id}.png`] ||
@@ -30,74 +32,93 @@ let dateOptions = {weekday: "long", year: "numeric", month: "long", day: "numeri
                   } 
                   alt="Soleil" className="img-soleil-details" 
             /> */}
-            <CardNft data={data} dataEth={props.dataEth} rarity="lunaire" />
-          </Col>
-          <Col sm={8} className="text-white ps-5">
-            <Row>
-              <Col sm={6}>
-                <div className="text-3xl leading-10">
-                  <dl className="mb-4">
-                    <dt>Nom en anglais : </dt>
-                    <dd>{data.englishName}</dd>
-                  </dl>
-                  <dl className="mb-4">
-                    <dt>Masse : </dt>
-                    <dd>
-                      {data.mass.massValue} &times; 10
-                      <sup>{data.mass.massExponent}</sup> &#x338F;
-                    </dd>
-                  </dl>
-                  <dl className="mb-4">
-                    <dt>Découverte par : </dt>
-                    <dd>
-                      {data.discoveredBy} le {data.discoveryDate}
-                    </dd>
-                  </dl>
-                  <dl className="mb-4">
-                    <dt>Densité : </dt>
-                    <dd>{data.density}.41 g/&#x33A4;</dd>
-                  </dl>
-                  <dl className="mb-4">
-                    <dt>Gravité de surface : </dt>
-                    <dd>274 &#x33A8;</dd>
-                  </dl>
-                </div>
-              </Col>
-              <Col sm={6}>
-                  <div className="text-3xl leading-10">
+              <CardNft data={data} dataEth={props.dataEth} rarity="lunaire" />
+            </Col>
+            <Col sm={8} className="text-white ps-5">
+              <Row>
+                <Col sm={6}>
+                  <div className="text-2xl leading-10">
                     <dl className="mb-4">
-                      <dt>Rayon à l&apos;équateur : </dt>
-                      <dd>{data.equaRadius.toLocaleString('fr-BE')} &#x339E;</dd>
+                      <dt>Nom en anglais : </dt>
+                      <dd>{data.englishName}</dd>
+                    </dl>
+                    {data.alternativeName === "" ? undefined : (
+                      <dl className="mb-4">
+                        <dt>Nom alternatif : </dt>
+                        <dd>{data.alternativeName}</dd>
+                      </dl>
+                    )}
+                    {data.discoveredBy === "" ? undefined : (
+                      <dl className="mb-4">
+                        <dt>Découverte par : </dt>
+                        <dd>
+                          {data.discoveredBy} <i>le</i> {data.discoveryDate}
+                        </dd>
+                      </dl>
+                    )}
+                    <dl className="mb-4">
+                      <dt>Masse : </dt>
+                      <dd>
+                        {data.mass.massValue} &times; 10
+                        <sup>{data.mass.massExponent}</sup> &#x338F;
+                      </dd>
                     </dl>
                     <dl className="mb-4">
-                      <dt>Distance de la Terre : </dt>
-                      <dd>{(149597870.7).toLocaleString("fr-BE")} &#x339E; &#x3D; 1 &#x3373;</dd>
+                      <dt>Rayon moyen : </dt>
+                      <dd>
+                        {data.meanRadius.toLocaleString("fr-BE")} &#x339E;
+                      </dd>
                     </dl>
                     <dl className="mb-4">
-                      <dt>Température de surface : </dt>
-                      <dd>{(5772).toLocaleString("fr-BE")} &#x212A;</dd>
-                    </dl>
-                    <dl className="mb-4">
-                      <dt>Température au centre : </dt>
-                      <dd>{15.1} millions &#x212A;</dd>
-                    </dl>
-                    <dl className="mb-4">
-                      <dt>Inclinaison de l&apos;axe sur le plan de l&apos;écliptique : </dt>
-                      <dd>{data.axialTilt}&deg;</dd>
+                      <dt>Gravité de surface : </dt>
+                      <dd>{data.gravity} &#x33A8;</dd>
                     </dl>
                   </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-        </>
-     );
+                </Col>
+                <Col lg={6}>
+                  <div className="text-2xl leading-10">
+                    <dl className="mb-4">
+                      <dt>Aphélie : </dt>
+                      <dd>{data.aphelion.toLocaleString("fr-BE")} &#x339E;</dd>
+                    </dl>
+                    <dl className="mb-4">
+                      <dt>Périhélie : </dt>
+                      <dd>
+                        {data.perihelion.toLocaleString("fr-BE")} &#x339E;
+                      </dd>
+                    </dl>
+                    {data.avgTemp === 0 ? undefined : (
+                      <dl className="mb-4">
+                        <dt>Température moyenne : </dt>
+                        <dd>
+                          {data.avgTemp} &#x212A;{" "}
+                          <span className="text-gray-500">=</span>{" "}
+                          {(data.avgTemp - 273.15).toFixed(2)} &#x2103;
+                        </dd>
+                      </dl>
+                    )}
+                    <dl className="mb-4">
+                      <dt>Période de révolution :</dt>
+                      <dd>{data.sideralOrbit.toLocaleString("fr-BE")} jours</dd>
+                    </dl>
+                    <dl className="mb-4">
+                      <dt>Période de rotation :</dt>
+                      <dd>
+                        {data.sideralRotation.toLocaleString("fr-BE")} heures
+                      </dd>
+                    </dl>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </>
+  );
 }
 
 export default Lunes;
-
 
 export async function getServerSideProps(context) {
   const allMoonsBrut = await getMoons();
@@ -130,7 +151,6 @@ export async function getServerSideProps(context) {
   );
 
   const dataEth = await responseEth.json();
-
 
   return {
     props: { luneActuelle, dataEth },
