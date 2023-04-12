@@ -37,10 +37,6 @@ export default function SoleilIndex(props) {
     }
   }, [isUnveiled]);
 
-  // Loader quand fetch
-  if (router.isFallback) {
-    return <Loader />;
-  }
 
   //TODO - Head
   return (

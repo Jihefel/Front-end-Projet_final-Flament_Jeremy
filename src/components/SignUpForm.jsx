@@ -31,7 +31,7 @@ export default function SignUpForm() {
       password: password.current.value,
     };
 
-    fetch("/api/accounts", {
+    fetch("./api/accounts", {
       method: "POST",
       body: JSON.stringify(newAccount),
       headers: {

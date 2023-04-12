@@ -7,6 +7,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   webpack(config) {
+ 
     config.module.rules.push({
       test: /\.(mp3)$/,
       use: [
@@ -20,7 +21,7 @@ const nextConfig = {
           },
         },
       ],
-    });
+    })
 
     return config;
   },

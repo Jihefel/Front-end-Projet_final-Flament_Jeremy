@@ -24,7 +24,6 @@ function CardNft(props) {
   const [price, setPrice] = useState(null);
 
 
-  console.log(router)
   // Prix de la carte random
   useEffect(() => {
     setPrice(Math.random().toFixed(5));

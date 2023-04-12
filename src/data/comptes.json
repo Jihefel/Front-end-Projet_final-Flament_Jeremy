@@ -1,10 +1,1 @@
-[
-    {
-        "prenom": "Jérémy",
-        "nom": "Flament",
-        "email": "jfl.jflament@gmail.com",
-        "password": "$2b$10$WWY08tLW3eaqqmG0xa5VnukxsGAXNScA9dkN34klYoxkGq2eH5Wxe",
-        "isConnected": false,
-        "message": {}
-    }
-]
+[{"prenom":"Admin","nom":"","email":"admin@admin.com","password":"aaa","isConnected":false,"message":{}},{"prenom":"Jérémy","nom":"Flament","email":"jfl.jflament@gmail.com","password":"aaa","isConnected":false,"message":{},"favorites":[]}]

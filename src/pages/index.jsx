@@ -7,10 +7,6 @@ import { useRouter } from "next/router";
 function Home(props) {
 
   const router = useRouter();
-
-  if (router.isFallback) {
-    return <Loader />;
-  }
   
   return (
     <>
@@ -47,7 +43,7 @@ export async function getStaticProps() {
 
   // Ajouter Cérès à la liste des planètes naines
   const dataPlanetesNaines = { bodies: [...dwarfBodies.bodies, ceres] };
-
+  
   return {
     props: { dataPlanetes, dataPlanetesNaines },
   };
