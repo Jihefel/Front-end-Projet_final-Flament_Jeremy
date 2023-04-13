@@ -3,9 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
-
+import comptes from "../data/comptes.json";
 import { FaEthereum } from "react-icons/fa";
-import { MdAddShoppingCart } from "react-icons/md"
 
 const images = {};
 
@@ -22,12 +21,40 @@ importAll(
 function CardNft(props) {
   const router = useRouter();
   const [price, setPrice] = useState(null);
-
+  const [compteActuel, setCompteActuel] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
   // Prix de la carte random
   useEffect(() => {
     setPrice(Math.random().toFixed(5));
   }, []);
+
+  useEffect(() => {
+    const account = comptes?.find((compte) => compte.isConnected === true);
+    setCompteActuel(account);
+  }, [comptes]);
+
+  const handleChange = (event) => {
+    setIsChecked(!isChecked)
+    // const accountActuel = comptes.find((account) => account.email === email && account.password === password);
+    fetch("/api/accounts", {
+      method: "PUT",
+      body: JSON.stringify(compteActuel),
+      headers : { 'Content-Type': 'application/json',}
+    })
+      .then((result) => result.json())
+      .then((responseData) => {
+        if (!compteActuel) {
+          console.error("pas connecté")
+          return;
+        }
+        // Mettre à jour le compte actuel
+        const updatedAccount = { ...compteActuel, favorites: favorites.push(data.props.id) };
+        const updatedAccounts = [...comptes];
+        updatedAccounts[updatedAccounts.indexOf(compteActuel)] = updatedAccount;
+      })
+  };
+
   
   return (
       <div className="card-wrapper">
@@ -57,13 +84,17 @@ function CardNft(props) {
               eyt erzh ryt erzh rrt fezht
             </Card.Text> */}
           </Card.Body>
-            <Card.Footer className="text-white flex items-center justify-between py-4">
-              <Button
-                className="button-ajouter flex items-center justify-between gap-2"
-                onClick={() => setIsClicked(!isClicked)}
-              >
-                <MdAddShoppingCart /> Acheter
-              </Button>
+            <Card.Footer className="text-white flex items-center justify-between py-3">
+            {compteActuel === undefined || "" ? "" : (
+              <label className="container-like">
+              <input checked={isChecked} type="checkbox" className={props.data.id} onChange={handleChange}/>
+              <div className="checkmark">
+                <svg viewBox="0 0 300 300">
+                <rect fill="none"></rect>
+                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" strokeWidth="20px" stroke="#FFF" fill="none"></path></svg>
+              </div>
+            </label>
+            )}
               <div className="flex items-center justify-center gap-3">
                 <h3 className="flex items-center justify-center m-0 prix">
                   {price} <FaEthereum />

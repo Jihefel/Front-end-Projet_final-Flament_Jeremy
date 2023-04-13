@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Titillium_Web } from "next/font/google";
 import { Navbar, Dropdown, Avatar } from "flowbite-react";
 import Image from "next/image";
 import {
@@ -12,19 +11,52 @@ import {
 } from "react-icons/gi";
 import comptes from "../../data/comptes.json";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
-const titillium = Titillium_Web({
-  weight: "400",
-  subsets: ["latin"],
-});
+
 
 function NavBar() {
   const [compteActuel, setCompteActuel] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const account = comptes?.find((compte) => compte.isConnected === true);
     setCompteActuel(account);
+    if (account?.isConnected) {
+      router.replace("/")
+    }
   }, [comptes]);
+
+  const deconnexion = () => {
+    fetch("/api/accounts", {
+      method: "PUT",
+      body: JSON.stringify(compteActuel),
+      headers : { 'Content-Type': 'application/json',}
+    })
+      .then((result) => result.json())
+      .then((responseData) => {
+        if (!compteActuel) {
+          console.error("Adresse e-mail inconnue");
+          return;
+        }
+        const accountPassword = comptes.find(
+          (account) => account.password === password
+        )
+        if (!accountPassword) {
+          console.error("Mot de passe incorrect");
+          return;
+        }
+        router.replace("/");
+        // Mettre à jour le compte actuel
+        const updatedAccount = { ...compteActuel, isConnected: false };
+        const updatedAccounts = [...comptes];
+        updatedAccounts[updatedAccounts.indexOf(compteActuel)] = updatedAccount;
+        // Naviguer vers la page suivante
+        router.replace("/");
+      })
+      .catch((error) => console.error(error.message));
+  };
+
 
   return (
     <>
@@ -68,7 +100,7 @@ function NavBar() {
                 label={
                   <Avatar
                     alt="User settings"
-                    img="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                    img="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
                     rounded={true}
                     className="my-4"
                     />
@@ -83,7 +115,7 @@ function NavBar() {
                 <Dropdown.Item>Favoris</Dropdown.Item>
                 <Dropdown.Item>Messages</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item>Déconnexion</Dropdown.Item>
+                <Dropdown.Item onClick={deconnexion}>Déconnexion</Dropdown.Item>
               </Dropdown>
                   <Navbar.Toggle />
             </div>

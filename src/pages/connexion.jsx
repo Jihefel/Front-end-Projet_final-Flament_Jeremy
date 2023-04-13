@@ -28,7 +28,6 @@ function Connexion() {
     fetch("/api/accounts", {})
       .then((result) => result.json())
       .then((datas) => setComptes(datas))
-      .then(console.log(comptes))
   };
 
   const handleSubmit = (event) => {
@@ -52,7 +51,6 @@ function Connexion() {
           setErrorMessage("Mot de passe incorrect");
           return;
         }
-        router.replace("/");
         // Mettre à jour le compte actuel
         const updatedAccount = { ...accountActuel, isConnected: true };
         const updatedAccounts = [...comptes];

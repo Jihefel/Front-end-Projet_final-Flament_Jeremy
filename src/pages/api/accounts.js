@@ -11,11 +11,10 @@ export default function handler(request, response) {
     response.status(200).json(data);
 
   } else if (request.method === "PUT") {
-    console.log(request.body)
     const email = request.body.email;
     const password = request.body.password;
-  
-    console.log(email, password);
+
+    console.log(request.body)
   
     const filePath = path.join(process.cwd(), "src", "data", "comptes.json");
     const fileData = fs.readFileSync(filePath);
@@ -34,9 +33,9 @@ export default function handler(request, response) {
       ...data[accountIndex],
       isConnected: !request.body.isConnected,
     };
-    console.log(accountUpdated)
+
     data[accountIndex] = accountUpdated;
-    console.log(data);
+    
     fs.writeFileSync(filePath, JSON.stringify(data));
     response.status(200).json({ message: "Account connected" });
 
