@@ -82,14 +82,56 @@
         color: black
         text-shadow: 0 0 3px black
         box-shadow: 0 0 100px #ffd739
-.button-ajouter
-    background: #710f04
-    color: #f4d96c
-    border: none
-    transition: all 0.4s ease-in-out
-    &:hover
-        background: #f4d96c
-        color: #2e0604
+.container-like
+        display: block
+        position: relative
+        cursor: pointer
+        user-select: none
+        transition: 100ms
+        height: fit-content
+        &:hover
+            transform: scale(1.1)
+        input
+            position: absolute
+            opacity: 0
+            cursor: pointer
+            height: 0
+            width: 0
+            &:checked 
+                ~ .checkmark
+                    animation: like_effect 400ms ease
+                    path
+                        fill: #FF5353
+                        stroke-width: 0
+        .checkmark
+            top: 0
+            left: 0
+            height: 2em
+            width: 2em
+            margin-top: 5px
+            margin-left: 5px
+            transition: 100ms
+            animation: dislike_effect 400ms ease
+
+@keyframes like_effect
+    0%
+        transform: scale(0)
+
+    50%
+        transform: scale(1.2)
+
+    100%
+        transform: scale(1)
+
+@keyframes dislike_effect
+    0%
+        transform: scale(0)
+
+    50%
+        transform: scale(1.2)
+
+    100%
+        transform: scale(1)
 .soleil
     background: url(../../../public/assets/images/soleil/soleil.gif), linear-gradient(to bottom, transparent, #2e0604 60% 100%)
     background-size: 120%
@@ -104,13 +146,6 @@
     height: auto
     transition: 3s
     opacity: 0
-.zoom
-    background: url(../../../public/assets/images/soleil/soleil.gif), linear-gradient(to bottom, transparent, #2e0604 60% 100%)
-    background-position: 50% 80%
-    background-repeat: no-repeat
-    color: #f4d96c
-    background-size: 200%!important
-    transition: 2s
 .titre-sec-soleil
     @include flammesTitre
     font-size: 4rem
@@ -144,4 +179,7 @@
         transform: rotateY(0deg) scale(0)
     100%
         transform: rotateY(1080deg) scale(1)
-        
+
+// @media (max-width: 1919px)
+//     .soleil-wrapper
+//         transform: scale(0.8)!important

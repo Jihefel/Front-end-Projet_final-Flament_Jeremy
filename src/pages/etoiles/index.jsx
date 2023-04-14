@@ -1,20 +1,24 @@
-import Hero from "./../../components/common/Hero";
 import soleilImage from "public/assets/images/soleil/soleil.gif";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Fragment, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, Button, Badge, Container } from "react-bootstrap";
 import { Tooltip } from "flowbite-react";
 import { FaEthereum } from "react-icons/fa";
-import { MdAddShoppingCart } from "react-icons/md";
-import Loader from "@/components/common/Loader";
+import comptes from "../../data/comptes.json";
 import useSound from "use-sound";
 import sunSonification from "public/assets/audio/NASA-Sun_Sonification.mp3";
+import { useSelector, useDispatch } from "react-redux";
+import { unveilTheCard } from "@/redux/features/unveiledSlice";
 
 export default function SoleilIndex(props) {
   const router = useRouter();
   const pageEndRef = useRef(null);
+  const bouton = useRef()
   const [playSunSound, { stop }] = useSound(sunSonification);
+  const dispatch = useDispatch();
+
+  const unveilingState = useSelector((state) => state.cardUnveiled.status)
 
   // Fonction de scroll to bottom
   const handleScrollToBottom = () => {
@@ -22,8 +26,8 @@ export default function SoleilIndex(props) {
   };
 
   const [price, setPrice] = useState(null);
-  const [isClicked, setIsClicked] = useState(false);
-  const [isUnveiled, setIsUnveiled] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [compteActuel, setCompteActuel] = useState("");
 
   // Prix de la carte random
   useEffect(() => {
@@ -32,15 +36,42 @@ export default function SoleilIndex(props) {
 
   // Quand la carte est dévoilée, scroll to bottom
   useEffect(() => {
-    if (isUnveiled) {
+    if (unveilingState) {
       handleScrollToBottom();
     }
-  }, [isUnveiled]);
+  }, [unveilingState]);
+
+  useEffect(() => {
+    const account = comptes?.find((compte) => compte.isConnected === true);
+    setCompteActuel(account);
+  }, [comptes]);
+
+  useEffect(() => {
+    const cardChanged = compteActuel?.favorites?.find(fav => fav.favdata.nom === bouton.current?.id)
+    if (cardChanged) {
+      setIsChecked(true)
+    } else {
+      setIsChecked(false)
+    }
+  }, [compteActuel, unveilingState]);
+
+  const handleChange = (event) => {
+  
+    const updatedAccount = { ...compteActuel, favorites: [...compteActuel.favorites, {favdata : {url: router.asPath, nom: props.data.name} }] };
+  
+    fetch(`/api/accounts/`, {
+      method: "PUT",
+      body: JSON.stringify(updatedAccount),
+      headers : { 'Content-Type': 'application/json' },
+    })
+    .then((result) => result.json())
+    .catch((error) => console.error(error));
+  };
 
 
   //TODO - Head
   return (
-    <section className="py-5">
+    <section>
       <Container>
         <h1 className="titre-sec-soleil titre">Le Soleil</h1>
         <p className="p-sec-soleil">
@@ -54,13 +85,15 @@ export default function SoleilIndex(props) {
           également l&apos;un des seuls à posséder une partie de l&apos;histoire
           de l&apos;exploration spatiale.
         </p>
-        {isUnveiled ? (
+        {unveilingState ? (
           <>
-          <div ref={pageEndRef} />
-            <div className={"my-5 soleil-wrapper" + (isUnveiled ? " rotate" : "") }>
+            <div ref={pageEndRef} />
+            <div
+              className={"my-5 soleil-wrapper" + (unveilingState ? " rotate" : "")}
+            >
               <Card
                 className={
-                  "text-center legendary " + (isClicked ? "zoom" : "soleil")
+                  "text-center legendary soleil"
                 }
               >
                 <Card.Header className="mb-3">
@@ -99,12 +132,31 @@ export default function SoleilIndex(props) {
                   </div>
                 </Card.Body>
                 <Card.Footer className="text-white flex items-center justify-between py-4">
-                  <Button
-                    className="button-ajouter flex items-center justify-between gap-2"
-                    onClick={() => setIsClicked(!isClicked)}
-                  >
-                    <MdAddShoppingCart /> Acheter
-                  </Button>
+                  {compteActuel === undefined || "" ? (
+                    ""
+                  ) : (
+                    <label className="container-like">
+                      <input
+                        checked={isChecked}
+                        type="checkbox"
+                        className={props.data.id + "input"}
+                        onChange={handleChange}
+                        id={props.data.name} 
+                        ref={bouton}
+                      />
+                      <div className="checkmark">
+                        <svg viewBox="0 0 300 300">
+                          <rect fill="none"></rect>
+                          <path
+                            d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                            strokeWidth="20px"
+                            stroke="#FFF"
+                            fill="none"
+                          ></path>
+                        </svg>
+                      </div>
+                    </label>
+                  )}
                   <div className="flex items-center justify-center gap-3">
                     <h3 className="flex items-center justify-center m-0 prix">
                       {price} <FaEthereum />
@@ -129,7 +181,10 @@ export default function SoleilIndex(props) {
                     Vous écoutez le son réél du Soleil capturé par la NASA
                   </span>
                   <br />{" "}
-                  <a href="https://www.nasa.gov/feature/goddard/2018/sounds-of-the-sun" target="_blank">
+                  <a
+                    href="https://www.nasa.gov/feature/goddard/2018/sounds-of-the-sun"
+                    target="_blank"
+                  >
                     https://www.nasa.gov/feature/goddard/2018/sounds-of-the-sun
                   </a>
                 </>
@@ -141,7 +196,7 @@ export default function SoleilIndex(props) {
               <Button
                 className="button-details py-4 px-5 text-2xl rounded-full uppercase"
                 onClick={() => {
-                  setIsUnveiled(true);
+                  dispatch(unveilTheCard());
                   stop();
                 }}
                 onMouseEnter={() => playSunSound()}

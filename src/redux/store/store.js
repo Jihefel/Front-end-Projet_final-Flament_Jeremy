@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import sliceName from '../features/navbar/isConnectedSlice';
+import unveiledSlice from '../features/unveiledSlice';
 
 export const store = configureStore({
   reducer: {
-    name: sliceName,
+    cardUnveiled: unveiledSlice,
   }
 });

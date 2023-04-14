@@ -1,7 +1,7 @@
 import { Badge } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, Button } from "react-bootstrap";
 import comptes from "../data/comptes.json";
 import { FaEthereum } from "react-icons/fa";
@@ -20,9 +20,11 @@ importAll(
 
 function CardNft(props) {
   const router = useRouter();
+  const bouton = useRef()
   const [price, setPrice] = useState(null);
   const [compteActuel, setCompteActuel] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+
 
   // Prix de la carte random
   useEffect(() => {
@@ -34,33 +36,35 @@ function CardNft(props) {
     setCompteActuel(account);
   }, [comptes]);
 
-  const handleChange = (event) => {
-    setIsChecked(!isChecked)
-    // const accountActuel = comptes.find((account) => account.email === email && account.password === password);
-    fetch("/api/accounts", {
+  useEffect(() => {
+    const cardChanged = compteActuel?.favorites?.find(fav => fav.favdata.nom === bouton.current.id)
+    if (cardChanged) {
+      setIsChecked(true)
+    } else {
+      setIsChecked(false)
+    }
+  }, [compteActuel]);
+
+
+  const handleChange = (e) => {
+    const updatedAccount = { ...compteActuel, favorites: [...compteActuel.favorites, {favdata : {url: router.asPath, nom: props.data.name} }] };
+  
+    fetch(`/api/accounts/`, {
       method: "PUT",
-      body: JSON.stringify(compteActuel),
-      headers : { 'Content-Type': 'application/json',}
+      body: JSON.stringify(updatedAccount),
+      headers : { 'Content-Type': 'application/json' },
     })
-      .then((result) => result.json())
-      .then((responseData) => {
-        if (!compteActuel) {
-          console.error("pas connecté")
-          return;
-        }
-        // Mettre à jour le compte actuel
-        const updatedAccount = { ...compteActuel, favorites: favorites.push(data.props.id) };
-        const updatedAccounts = [...comptes];
-        updatedAccounts[updatedAccounts.indexOf(compteActuel)] = updatedAccount;
-      })
+    .then((result) => result.json())
+    .catch((error) => console.error(error));
   };
+  
 
   
   return (
       <div className="card-wrapper">
         <Card className={'text-center card-nft ' +  (props.rarity === "lunaire" ? "bg-gradient-to-bl from-black to-zinc-700" : props.rarity === "planétaire" ? "bg-gradient-to-bl from-blue-500 to-emerald-700" : "bg-gradient-to-bl from-gray-300 to-amber-950")}>
           <Card.Header className="mb-3">
-            <h1 className="titre my-2 lunes">{props.data.name}</h1>
+            <h1 className="titre my-2 text-white text-4xl">{props.data.name}</h1>
             <Badge
               color={props.rarity === "lunaire" ? "dark" : props.rarity === "planétaire" ? "success" : "failure"}
               className="my-2 uppercase absolute"
@@ -87,7 +91,7 @@ function CardNft(props) {
             <Card.Footer className="text-white flex items-center justify-between py-3">
             {compteActuel === undefined || "" ? "" : (
               <label className="container-like">
-              <input checked={isChecked} type="checkbox" className={props.data.id} onChange={handleChange}/>
+              <input checked={isChecked} type="checkbox" onChange={handleChange} id={props.data.name} ref={bouton} />
               <div className="checkmark">
                 <svg viewBox="0 0 300 300">
                 <rect fill="none"></rect>

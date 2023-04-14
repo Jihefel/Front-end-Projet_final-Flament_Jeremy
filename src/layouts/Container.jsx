@@ -13,7 +13,7 @@ export default function Layout(props) {
   return (
     <>
       <NavBar />
-      <main className={titilliumWeb.className}>
+      <main className={titilliumWeb.className + " py-5"} >
           {props.children}
       </main>
       <Footer />

@@ -1,37 +1,48 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Col, Row, Container } from 'react-bootstrap';
-import Image from "next/image";
 import CardNft from "@/components/CardNft";
-
-
-
+import { GiAstronautHelmet } from "react-icons/gi";
+import { Breadcrumb } from "flowbite-react";
 
 function Planetes(props) {
 const router = useRouter()
 const data = props.planeteActuelle
 
+const segments = router.asPath.split('/').filter((segment) => segment !== '');
+
+const breadcrumbItems = [
+  // Ajouter un élément d'accueil au début du breadcrumb
+  <Breadcrumb.Item key="home" icon={GiAstronautHelmet}>
+    <Link href="/" className="text-white">Accueil</Link>
+  </Breadcrumb.Item>,
+  // Ajouter les éléments dynamiques en utilisant les segments du chemin d'URL
+  ...segments.map((segment, index) => {
+    const isLast = index === segments.length - 1;
+    const href = `/${segments.slice(0, index + 1).join('/')}`;
+
+    return (
+      <Breadcrumb.Item key={segment}>
+        {isLast ? segment.at(0).toUpperCase() + segment.substring(1) : <Link href={href} className="text-white">{segment.at(0).toUpperCase() + segment.substring(1)}</Link>}
+      </Breadcrumb.Item>
+    );
+  }),
+];
+
+
     return ( 
         <>
-        <section className="py-5 section-lunes-details">
+        <section className="planetes">
       <Container>
-        <h1 className="titre-sec-lunes titre">{data.name}</h1>
+      <Breadcrumb aria-label="Default breadcrumb example">{breadcrumbItems}</Breadcrumb>
+        <h1 className="titre-planetes titre">{data.name}</h1>
         <Row>
-          <Col sm={4}>
-            {/* <Image src={
-                    images[`./lunes/${data.aroundPlanet.planet}/${data.id}.jpg`] ||
-                    images[`./lunes/${data.aroundPlanet.planet}/${data.id}.jpeg`] ||
-                    images[`./lunes/${data.aroundPlanet.planet}/${data.id}.png`] ||
-                    images[`./lunes/${data.aroundPlanet.planet}/${data.id}.svg`] ||
-                    images[`./lunes/${data.aroundPlanet.planet}/${data.id}.webp`]
-                  } 
-                  alt="Soleil" className="img-soleil-details" 
-            /> */}
+          <Col lg={4}>
             <CardNft data={data} dataEth={props.dataEth} rarity="planétaire" />
           </Col>
-          <Col sm={8} className="text-white ps-5">
+          <Col lg={8} className="text-white ps-5">
             <Row>
-              <Col sm={6}>
+              <Col lg={6}>
                 <div className="text-2xl leading-10">
                   <dl className="mb-4">
                     <dt>Nom en anglais : </dt>
@@ -72,7 +83,7 @@ const data = props.planeteActuelle
                     )}
                 </div>
               </Col>
-              <Col sm={6}>
+              <Col lg={6}>
                   <div className="text-2xl leading-10">
                   <dl className="mb-4">
                       <dt>Aphélie : </dt>

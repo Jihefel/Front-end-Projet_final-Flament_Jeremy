@@ -1,50 +1,13 @@
-import { Button, Form } from "react-bootstrap";
+import { Textarea, Label, Button } from "flowbite-react";
+import { Container } from 'react-bootstrap';
 import Head from "next/head";
 import React, { useState, useEffect, useRef } from "react";
+import { BiMailSend } from "react-icons/bi"
 
 function Contact() {
-  const [data, setData] = useState();
+  const textarea = useRef()
 
-  useEffect(() => {
-    newContact();
-  }, []);
 
-  const newContact = () => {
-    fetch("/api/contact")
-      .then((result) => result.json())
-      .then((data) => setData(data))
-      .catch((err) => console.error(err));
-  };
-
-  let randomContact;
-  if (data) {
-    randomContact = data[~~(Math.random() * data.length)];
-  }
-
-  const newName = useRef();
-  const newPhone = useRef();
-  const newEmail = useRef();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newContact = {
-      name: newName.current.value,
-      phone: newPhone.current.value,
-      email: newEmail.current.value,
-    };
-
-    fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify(newContact),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((result) => result.json());
-    newName.current.value = "";
-    newPhone.current.value = "";
-    newEmail.current.value = "";
-  }
 
   return (
     <>
@@ -53,36 +16,24 @@ function Contact() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Contact</title>
       </Head>
-      <h1 className="text-center">Contact au hasard</h1>
-      <Button className="btn d-block mx-auto" onClick={newContact}>
-        Random
-      </Button>
-
-      <ul>
-        <li>{randomContact?.name}</li>
-        <li>{randomContact?.phone}</li>
-        <li>{randomContact?.email}</li>
-      </ul>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Complete name" ref={newName} />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPhone">
-          <Form.Label>Phone</Form.Label>
-          <Form.Control type="phone" placeholder="Phone" ref={newPhone} />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Email" ref={newEmail} />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Submit
+      <Container>
+        <h1 className="text-white text-6xl mb-5">Contactez-nous</h1>
+        <div id="textarea">
+          <div className="mb-2 block">
+            <Label htmlFor="comment" value="Votre message" />
+          </div>
+          <Textarea
+            id="comment"
+            placeholder="Votre message..."
+            required={true}
+            rows={4}
+            ref={textarea}
+          />
+        </div>
+        <Button color="purple" className="w-auto mx-auto mt-3">
+          Envoyer &thinsp;<BiMailSend />
         </Button>
-      </Form>
+      </Container>
     </>
   );
 }

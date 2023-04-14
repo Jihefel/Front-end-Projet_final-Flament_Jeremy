@@ -1,8 +1,9 @@
-import PreviewBody from "@/components/common/PreviewBody";
-import { TextInput, Accordion, Carousel } from "flowbite-react";
+import PreviewBody from "@/components/PreviewBody";
+import { Breadcrumb } from "flowbite-react";
 import { Container } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { GiAstronautHelmet } from "react-icons/gi";
 
 function PlanetesLunes(props) {
   const router = useRouter();
@@ -15,11 +16,34 @@ function PlanetesLunes(props) {
 
   const lunesFiltrees = lunes.flat();
 
+  const segments = router.asPath.split('/').filter((segment) => segment !== '');
+
+  const breadcrumbItems = [
+    // Ajouter un élément d'accueil au début du breadcrumb
+    <Breadcrumb.Item key="home" icon={GiAstronautHelmet}>
+      <Link href="/" className="text-white">Accueil</Link>
+    </Breadcrumb.Item>,
+    // Ajouter les éléments dynamiques en utilisant les segments du chemin d'URL
+    ...segments.map((segment, index) => {
+      const isLast = index === segments.length - 1;
+      const href = `/${segments.slice(0, index + 1).join('/')}`;
+
+      return (
+        <Breadcrumb.Item key={segment}>
+          {isLast ? segment.at(0).toUpperCase() + segment.substring(1) : <Link href={href} className="text-white">{segment.at(0).toUpperCase() + segment.substring(1)}</Link>}
+        </Breadcrumb.Item>
+      );
+    }),
+  ];
+
+
+
   return (
     <>
-      <section className="planetes py-5">
+      <section className="planetes">
         <Container>
-          <h1 className="titre-planetes">
+        <Breadcrumb aria-label="Default breadcrumb example">{breadcrumbItems}</Breadcrumb>
+          <h1 className="titre-sec-lunes">
             Les lunes de{" "}
             {(router.query.planetes === "terre" ? "La " : "") +
               router.query.planetes.at(0).toUpperCase() +
@@ -193,6 +217,6 @@ export async function getStaticPaths() {
     // paths: [{params : {corps: "la Terre"}}],
     // fallback: true,
     paths,
-    fallback: true,
+    fallback: false,
   };
 }

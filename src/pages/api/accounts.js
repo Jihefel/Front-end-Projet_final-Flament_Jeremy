@@ -13,9 +13,9 @@ export default function handler(request, response) {
   } else if (request.method === "PUT") {
     const email = request.body.email;
     const password = request.body.password;
+    const isConnected = request.body.isConnected
+    const favorites = request.body.favorites
 
-    console.log(request.body)
-  
     const filePath = path.join(process.cwd(), "src", "data", "comptes.json");
     const fileData = fs.readFileSync(filePath);
     const data = JSON.parse(fileData);
@@ -31,15 +31,34 @@ export default function handler(request, response) {
   
     const accountUpdated = {
       ...data[accountIndex],
-      isConnected: !request.body.isConnected,
     };
+    console.log(accountUpdated.isConnected)
+    console.log(isConnected)
+    console.log(accountUpdated.favorites)
+    console.log(favorites)
+    if (isConnected === accountUpdated.isConnected && accountUpdated.favorites !== favorites) {
+      console.log("ok1")
+      const favIndexToChange = accountUpdated.favorites.findIndex(favoris => favoris.favdata.nom === favorites[favorites.length - 1].favdata.nom)
+      if (favIndexToChange === -1) {
+        console.log('ok add fav')
+        accountUpdated.favorites = favorites;
+      } else {
+        console.log("no ok")
+        accountUpdated.favorites.splice(favIndexToChange, 1)
+      }
+    }
 
-    data[accountIndex] = accountUpdated;
+    if (isConnected !== accountUpdated.isConnected) {
+      accountUpdated.isConnected = isConnected;
+    } else {
+      accountUpdated.isConnected = isConnected;
+    }
     
+    data[accountIndex] = accountUpdated;
     fs.writeFileSync(filePath, JSON.stringify(data));
-    response.status(200).json({ message: "Account connected" });
-
-  } else if (request.method === "POST") {
+    response.status(200).json({ message: "Account updated" });
+}
+ else if (request.method === "POST") {
 
     const prenom = request.body.prenom;
     const nom = request.body.nom;

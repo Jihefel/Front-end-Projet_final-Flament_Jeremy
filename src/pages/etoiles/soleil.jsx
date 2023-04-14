@@ -5,7 +5,7 @@ import sun2 from "public/assets/images/soleil/sun2.jpg";
 export default function Soleil(props) {
   const data = props.data
   return (
-    <section className="py-5 section-soleil-details">
+    <section className="section-soleil-details">
       <Container>
         <h1 className="titre-sec-soleil titre">Le Soleil</h1>
         <Row>

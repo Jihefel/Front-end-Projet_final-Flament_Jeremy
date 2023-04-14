@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import logo from "../../public/assets/images/orrery_icon.svg"
 
 function Connexion() {
   const router = useRouter();
@@ -33,32 +34,27 @@ function Connexion() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const accountActuel = comptes.find((account) => account.email === email && account.password === password);
+    const updatedAccount = { ...accountActuel, isConnected: true };
     fetch("/api/accounts", {
       method: "PUT",
-      body: JSON.stringify(accountActuel),
+      body: JSON.stringify(updatedAccount),
       headers : { 'Content-Type': 'application/json',}
     })
       .then((result) => result.json())
       .then((responseData) => {
         if (!accountActuel) {
-          setErrorMessage("Adresse e-mail inconnue");
-          return;
-        }
-        const accountPassword = comptes.find(
-          (account) => account.password === password
-        )
-        if (!accountPassword) {
-          setErrorMessage("Mot de passe incorrect");
+          setErrorMessage("Compte inconnu avec cette adresse e-mail et ce mot de passe. Veuillez revérifier les deux.");
           return;
         }
         // Mettre à jour le compte actuel
-        const updatedAccount = { ...accountActuel, isConnected: true };
         const updatedAccounts = [...comptes];
         updatedAccounts[updatedAccounts.indexOf(accountActuel)] = updatedAccount;
         setComptes(updatedAccounts);
         setCompteActuel(updatedAccount);
         // Naviguer vers la page suivante
-        router.replace("/");
+        setTimeout(() => {
+          router.push("/");
+        }, 400)
       })
       .catch((error) => setErrorMessage(error.message));
   };
@@ -69,10 +65,10 @@ function Connexion() {
       <div className="flex min-h-full items-center justify-center px-4 py-24 sm:px-6 lg:px-8 w-100">
         <div className="w-full max-w-md space-y-8">
           <div>
-            <img
+            <Image
               className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
+              src={logo}
+              alt="logo PlaNFT"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
               Connectez-vous à votre compte
@@ -80,7 +76,7 @@ function Connexion() {
           </div>
           <div className="text-red-500 text-sm mt-2" id="error-message">
           {errorMessage && <p>{errorMessage}</p>}
-         {compteActuel.prenom === undefined ? "" : `Bonjour, ${compteActuel.prenom}`}
+         {compteActuel.prenom === undefined ? "" : <p className="text-white">Bonjour, {compteActuel.prenom}</p>}
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="-space-y-px rounded-md shadow-sm">
@@ -119,20 +115,6 @@ function Connexion() {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-400"
-                >
-                  Se souvenir de moi
-                </label>
-              </div>
 
               <div className="text-sm">
                 <a

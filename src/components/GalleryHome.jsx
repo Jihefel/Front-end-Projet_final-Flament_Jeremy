@@ -16,7 +16,7 @@ importAll(
 
 function GalleryHome(props) {
   return (
-    <div className="gallery">
+    <div className="gallery home">
       <Link href={"/etoiles"}>
         <div className="image-container relative">
           <figure className="relative">

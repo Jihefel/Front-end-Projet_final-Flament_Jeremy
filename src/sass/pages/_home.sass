@@ -1,4 +1,4 @@
-.gallery
+.gallery.home
   display: grid
   grid-template-columns: repeat(4, 1fr)
   height: calc( 100dvh - 104px )
@@ -64,8 +64,7 @@
     transform: translateX(-50%)
     z-index: 10
     filter: drop-shadow(0 0 3px black)
-    
-      
+
 @keyframes mouvement
   0%
     object-position: center
@@ -77,5 +76,8 @@
 @keyframes arrowEffect
   0%
     filter: drop-shadow(2px 0px rgba(110, 110, 110, 0.185))
-  100% 
+  100%
     filter: drop-shadow(15px 0px rgba(0,0,0,0.4))
+
+@media (max-width: 650px)
+

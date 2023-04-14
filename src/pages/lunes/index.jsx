@@ -31,17 +31,10 @@ function LunesIndex(props) {
 
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <Loader />;
-  }
-
-  //TODO - Gallerie comme Home mais vertical avec l'image de la planete avec ses lunes plutot, pour avoir un page intermédiaire
-
   return (
-        //TODO - Transformer en component
-    <section className="planetes py-5 section-lunes">
+    <section className="planetes section-lunes">
       <Container>
-        <h1 className="titre-planetes-naines">Les lunes</h1>
+        <h1 className="titre-sec-lunes titres">Les lunes</h1>
       </Container>
       <div className="gallery">
         {planetesUniques.map((planete, index) => (

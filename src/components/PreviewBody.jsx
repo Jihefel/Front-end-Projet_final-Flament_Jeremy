@@ -11,7 +11,7 @@ function importAll(r) {
 // Import all images in subdirectories of ./public/assets/images/
 importAll(
   require.context(
-    "../../../public/assets/images",
+    "../../public/assets/images",
     true,
     /\.(png|jpe?g|svg|webp)$/
   )

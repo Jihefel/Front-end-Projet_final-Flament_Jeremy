@@ -13,7 +13,7 @@ function Home(props) {
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Exo Next</title>
+        <title>PlaNFT - Home</title>
       </Head>
      
       <GalleryHome dataPlanetes={props.dataPlanetes.bodies} dataPlanetesNaines={props.dataPlanetesNaines.bodies} />
