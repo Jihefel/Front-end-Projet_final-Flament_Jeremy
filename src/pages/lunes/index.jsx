@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Container } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 const images = {};
 
@@ -32,39 +33,52 @@ function LunesIndex(props) {
   const router = useRouter();
 
   return (
-    <section className="planetes section-lunes">
-      <Container>
-        <h1 className="titre-sec-lunes titres">Les lunes</h1>
-      </Container>
-      <div className="gallery">
-        {planetesUniques.map((planete, index) => (
-          <Link href={router.pathname + "/" + planete} key={planete}>
-            <div className="image-container relative">
-              <figure>
-                <Image
-                  // src={images[`./planetes/lunes-${planete}.jpg`].default}
-                  src={
-                    images[`./lunes/${planete}/lunes-${planete}.jpg`] ||
-                    images[`./lunes/${planete}/lunes-${planete}.jpeg`] ||
-                    images[`./lunes/${planete}/lunes-${planete}.png`] ||
-                    images[`./lunes/${planete}/lunes-${planete}.svg`] ||
-                    images[`./lunes/${planete}/lunes-${planete}.webp`]
-                  }
-                  alt={planete}
-                  priority
-                />
-                <figcaption className="absolute text-white">
-                  Lune{planete === "terre" ? "" : "s"} de {(planete === "terre" ? "La " : "") + planete.at(0).toUpperCase() + planete.substring(1)}
-                </figcaption>
-              </figure>
-              <p className="direction-carousel absolute text-white top-1/2 left-1/2 -translate-x-1/2 z-10 opacity-0 duration-300">
-                Vers {(planete === "terre" ? "La " : "") + planete.at(0).toUpperCase() + planete.substring(1)}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
+    <>
+      <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Les lunes</title>
+      </Head>
+      <section className="planetes section-lunes">
+        <Container>
+          <h1 className="titre-sec-lunes titres">Les lunes</h1>
+        </Container>
+        <div className="gallery">
+          {planetesUniques.map((planete, index) => (
+            <Link href={router.pathname + "/" + planete} key={planete}>
+              <div className="image-container relative">
+                <figure>
+                  <Image
+                    // src={images[`./planetes/lunes-${planete}.jpg`].default}
+                    src={
+                      images[`./lunes/${planete}/lunes-${planete}.jpg`] ||
+                      images[`./lunes/${planete}/lunes-${planete}.jpeg`] ||
+                      images[`./lunes/${planete}/lunes-${planete}.png`] ||
+                      images[`./lunes/${planete}/lunes-${planete}.svg`] ||
+                      images[`./lunes/${planete}/lunes-${planete}.webp`]
+                    }
+                    alt={planete}
+                    priority
+                  />
+                  <figcaption className="absolute text-white">
+                    Lune{planete === "terre" ? "" : "s"} de{" "}
+                    {(planete === "terre" ? "La " : "") +
+                      planete.at(0).toUpperCase() +
+                      planete.substring(1)}
+                  </figcaption>
+                </figure>
+                <p className="direction-carousel absolute text-white top-1/2 left-1/2 -translate-x-1/2 z-10 opacity-0 duration-300">
+                  Vers{" "}
+                  {(planete === "terre" ? "La " : "") +
+                    planete.at(0).toUpperCase() +
+                    planete.substring(1)}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 

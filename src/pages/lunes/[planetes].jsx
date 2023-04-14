@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { GiAstronautHelmet } from "react-icons/gi";
+import Head from "next/head";
 
 function PlanetesLunes(props) {
   const router = useRouter();
@@ -16,33 +17,51 @@ function PlanetesLunes(props) {
 
   const lunesFiltrees = lunes.flat();
 
-  const segments = router.asPath.split('/').filter((segment) => segment !== '');
+  const segments = router.asPath.split("/").filter((segment) => segment !== "");
 
   const breadcrumbItems = [
     // Ajouter un élément d'accueil au début du breadcrumb
     <Breadcrumb.Item key="home" icon={GiAstronautHelmet}>
-      <Link href="/" className="text-white">Accueil</Link>
+      <Link href="/" className="text-white">
+        Accueil
+      </Link>
     </Breadcrumb.Item>,
     // Ajouter les éléments dynamiques en utilisant les segments du chemin d'URL
     ...segments.map((segment, index) => {
       const isLast = index === segments.length - 1;
-      const href = `/${segments.slice(0, index + 1).join('/')}`;
+      const href = `/${segments.slice(0, index + 1).join("/")}`;
 
       return (
         <Breadcrumb.Item key={segment}>
-          {isLast ? segment.at(0).toUpperCase() + segment.substring(1) : <Link href={href} className="text-white">{segment.at(0).toUpperCase() + segment.substring(1)}</Link>}
+          {isLast ? (
+            segment.at(0).toUpperCase() + segment.substring(1)
+          ) : (
+            <Link href={href} className="text-white">
+              {segment.at(0).toUpperCase() + segment.substring(1)}
+            </Link>
+          )}
         </Breadcrumb.Item>
       );
     }),
   ];
 
-
-
   return (
     <>
+      <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+          Les lunes de{" "}
+          {(router.query.planetes === "terre" ? "La " : "") +
+            router.query.planetes.at(0).toUpperCase() +
+            router.query.planetes.substring(1)}
+        </title>
+      </Head>
       <section className="planetes">
         <Container>
-        <Breadcrumb aria-label="Default breadcrumb example">{breadcrumbItems}</Breadcrumb>
+          <Breadcrumb aria-label="Default breadcrumb example">
+            {breadcrumbItems}
+          </Breadcrumb>
           <h1 className="titre-sec-lunes">
             Les lunes de{" "}
             {(router.query.planetes === "terre" ? "La " : "") +

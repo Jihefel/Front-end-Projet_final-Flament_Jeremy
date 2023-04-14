@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getMoons } from "./[planetes]";
 import { useRouter } from "next/router";
 import { Col, Row, Container } from "react-bootstrap";
-import Image from "next/image";
+import Head from "next/head";
 import CardNft from "@/components/CardNft";
 import { Breadcrumb } from "flowbite-react";
 import { GiAstronautHelmet } from "react-icons/gi";
@@ -34,6 +34,13 @@ function Lunes(props) {
 
   return (
     <>
+    <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+          {router.query.lunes[1]}
+        </title>
+      </Head>
       <section className="section-lunes-details">
         <Container>
         <Breadcrumb aria-label="Default breadcrumb example">{breadcrumbItems}</Breadcrumb>

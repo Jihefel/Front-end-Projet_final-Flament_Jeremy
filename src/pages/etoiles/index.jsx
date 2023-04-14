@@ -10,6 +10,7 @@ import useSound from "use-sound";
 import sunSonification from "public/assets/audio/NASA-Sun_Sonification.mp3";
 import { useSelector, useDispatch } from "react-redux";
 import { unveilTheCard } from "@/redux/features/unveiledSlice";
+import Head from "next/head";
 
 export default function SoleilIndex(props) {
   const router = useRouter();
@@ -69,8 +70,15 @@ export default function SoleilIndex(props) {
   };
 
 
-  //TODO - Head
   return (
+    <>
+    <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+          La carte du Soleil
+        </title>
+      </Head>
     <section>
       <Container>
         <h1 className="titre-sec-soleil titre">Le Soleil</h1>
@@ -89,7 +97,7 @@ export default function SoleilIndex(props) {
           <>
             <div ref={pageEndRef} />
             <div
-              className={"my-5 soleil-wrapper" + (unveilingState ? " rotate" : "")}
+              className={"my-3 soleil-wrapper" + (unveilingState ? " rotate" : "")}
             >
               <Card
                 className={
@@ -209,6 +217,7 @@ export default function SoleilIndex(props) {
         )}
       </Container>
     </section>
+    </>
   );
 }
 

@@ -1,61 +1,80 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Col, Row, Container } from 'react-bootstrap';
+import { Col, Row, Container } from "react-bootstrap";
 import CardNft from "@/components/CardNft";
 import { GiAstronautHelmet } from "react-icons/gi";
 import { Breadcrumb } from "flowbite-react";
+import Head from "next/head";
 
 function Planetes(props) {
-const router = useRouter()
-const data = props.planeteActuelle
+  const router = useRouter();
+  const data = props.planeteActuelle;
 
-const segments = router.asPath.split('/').filter((segment) => segment !== '');
+  const segments = router.asPath.split("/").filter((segment) => segment !== "");
 
-const breadcrumbItems = [
-  // Ajouter un élément d'accueil au début du breadcrumb
-  <Breadcrumb.Item key="home" icon={GiAstronautHelmet}>
-    <Link href="/" className="text-white">Accueil</Link>
-  </Breadcrumb.Item>,
-  // Ajouter les éléments dynamiques en utilisant les segments du chemin d'URL
-  ...segments.map((segment, index) => {
-    const isLast = index === segments.length - 1;
-    const href = `/${segments.slice(0, index + 1).join('/')}`;
+  const breadcrumbItems = [
+    // Ajouter un élément d'accueil au début du breadcrumb
+    <Breadcrumb.Item key="home" icon={GiAstronautHelmet}>
+      <Link href="/" className="text-white">
+        Accueil
+      </Link>
+    </Breadcrumb.Item>,
+    // Ajouter les éléments dynamiques en utilisant les segments du chemin d'URL
+    ...segments.map((segment, index) => {
+      const isLast = index === segments.length - 1;
+      const href = `/${segments.slice(0, index + 1).join("/")}`;
 
-    return (
-      <Breadcrumb.Item key={segment}>
-        {isLast ? segment.at(0).toUpperCase() + segment.substring(1) : <Link href={href} className="text-white">{segment.at(0).toUpperCase() + segment.substring(1)}</Link>}
-      </Breadcrumb.Item>
-    );
-  }),
-];
+      return (
+        <Breadcrumb.Item key={segment}>
+          {isLast ? (
+            segment.at(0).toUpperCase() + segment.substring(1)
+          ) : (
+            <Link href={href} className="text-white">
+              {segment.at(0).toUpperCase() + segment.substring(1)}
+            </Link>
+          )}
+        </Breadcrumb.Item>
+      );
+    }),
+  ];
 
-
-    return ( 
-        <>
-        <section className="planetes">
-      <Container>
-      <Breadcrumb aria-label="Default breadcrumb example">{breadcrumbItems}</Breadcrumb>
-        <h1 className="titre-planetes titre">{data.name}</h1>
-        <Row>
-          <Col lg={4}>
-            <CardNft data={data} dataEth={props.dataEth} rarity="planétaire" />
-          </Col>
-          <Col lg={8} className="text-white ps-5">
-            <Row>
-              <Col lg={6}>
-                <div className="text-2xl leading-10">
-                  <dl className="mb-4">
-                    <dt>Nom en anglais : </dt>
-                    <dd>{data.englishName}</dd>
-                  </dl>
-                  <dl className="mb-4">
-                    <dt>Masse : </dt>
-                    <dd>
-                      {data.mass.massValue} &times; 10
-                      <sup>{data.mass.massExponent}</sup> &#x338F;
-                    </dd>
-                  </dl>
-                  {data.discoveredBy === "" ? undefined : (
+  return (
+    <>
+      <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{router.query.planete}</title>
+      </Head>
+      <section className="planetes">
+        <Container>
+          <Breadcrumb aria-label="Default breadcrumb example">
+            {breadcrumbItems}
+          </Breadcrumb>
+          <h1 className="titre-planetes titre">{data.name}</h1>
+          <Row>
+            <Col lg={4}>
+              <CardNft
+                data={data}
+                dataEth={props.dataEth}
+                rarity="planétaire"
+              />
+            </Col>
+            <Col lg={8} className="text-white ps-5">
+              <Row>
+                <Col lg={6}>
+                  <div className="text-2xl leading-10">
+                    <dl className="mb-4">
+                      <dt>Nom en anglais : </dt>
+                      <dd>{data.englishName}</dd>
+                    </dl>
+                    <dl className="mb-4">
+                      <dt>Masse : </dt>
+                      <dd>
+                        {data.mass.massValue} &times; 10
+                        <sup>{data.mass.massExponent}</sup> &#x338F;
+                      </dd>
+                    </dl>
+                    {data.discoveredBy === "" ? undefined : (
                       <dl className="mb-4">
                         <dt>Découverte par : </dt>
                         <dd>
@@ -63,11 +82,13 @@ const breadcrumbItems = [
                         </dd>
                       </dl>
                     )}
-                   <dl className="mb-4">
+                    <dl className="mb-4">
                       <dt>Rayon à l&apos;équateur : </dt>
-                      <dd>{data.equaRadius.toLocaleString('fr-BE')} &#x339E;</dd>
+                      <dd>
+                        {data.equaRadius.toLocaleString("fr-BE")} &#x339E;
+                      </dd>
                     </dl>
-                  <dl className="mb-4">
+                    <dl className="mb-4">
                       <dt>Gravité de surface : </dt>
                       <dd>{data.gravity} &#x33A8;</dd>
                     </dl>
@@ -81,11 +102,11 @@ const breadcrumbItems = [
                         </dd>
                       </dl>
                     )}
-                </div>
-              </Col>
-              <Col lg={6}>
+                  </div>
+                </Col>
+                <Col lg={6}>
                   <div className="text-2xl leading-10">
-                  <dl className="mb-4">
+                    <dl className="mb-4">
                       <dt>Aphélie : </dt>
                       <dd>{data.aphelion.toLocaleString("fr-BE")} &#x339E;</dd>
                     </dl>
@@ -106,39 +127,42 @@ const breadcrumbItems = [
                       </dd>
                     </dl>
                     <dl className="mb-4">
-                      <dt>Inclinaison de l&apos;axe sur le plan de l&apos;écliptique : </dt>
+                      <dt>
+                        Inclinaison de l&apos;axe sur le plan de
+                        l&apos;écliptique :{" "}
+                      </dt>
                       <dd>{data.axialTilt}&deg;</dd>
                     </dl>
                   </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    </section>
-        </>
-     );
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </>
+  );
 }
 
 export default Planetes;
 
 export async function getStaticProps(context) {
-    const slug = context.params.planete;
-    const responsePlanetes = await fetch(
-        `https://api.le-systeme-solaire.net/rest/bodies?filter[]=bodyType,eq,Planet`
-      );
-      const dataPlanetes = await responsePlanetes.json();
-  
-    const planeteActuelle = dataPlanetes.bodies.find(
-      (body) => body.id.toLowerCase() === slug
-    );
-  
-    // Si pas de planete valide envoyée en url
-    if (!planeteActuelle) {
-      return { notFound: true };
-    }
+  const slug = context.params.planete;
+  const responsePlanetes = await fetch(
+    `https://api.le-systeme-solaire.net/rest/bodies?filter[]=bodyType,eq,Planet`
+  );
+  const dataPlanetes = await responsePlanetes.json();
 
-    // Récupérer le prix de l'ETH
+  const planeteActuelle = dataPlanetes.bodies.find(
+    (body) => body.id.toLowerCase() === slug
+  );
+
+  // Si pas de planete valide envoyée en url
+  if (!planeteActuelle) {
+    return { notFound: true };
+  }
+
+  // Récupérer le prix de l'ETH
   const amount = 1;
   const convert = "EUR";
   const symbol = "ETH";
@@ -155,28 +179,26 @@ export async function getStaticProps(context) {
   );
 
   const dataEth = await responseEth.json();
-  
-    return {
-      props: { planeteActuelle, dataEth },
-    };
-  }
-  
-  export async function getStaticPaths() {
-    const responsePlanetes = await fetch(
-        `https://api.le-systeme-solaire.net/rest/bodies?filter[]=bodyType,eq,Planet`
-      );
-      const dataPlanetes = await responsePlanetes.json();
-  
-    const paths = dataPlanetes.bodies.map((body) => ({
-      params: { planete: body.id },
-    }));
-  
-    return {
-      // paths: [{params : {corps: "la Terre"}}],
-      // fallback: true,
-      paths,
-      fallback: false,
-    };
-  }
 
+  return {
+    props: { planeteActuelle, dataEth },
+  };
+}
 
+export async function getStaticPaths() {
+  const responsePlanetes = await fetch(
+    `https://api.le-systeme-solaire.net/rest/bodies?filter[]=bodyType,eq,Planet`
+  );
+  const dataPlanetes = await responsePlanetes.json();
+
+  const paths = dataPlanetes.bodies.map((body) => ({
+    params: { planete: body.id },
+  }));
+
+  return {
+    // paths: [{params : {corps: "la Terre"}}],
+    // fallback: true,
+    paths,
+    fallback: false,
+  };
+}

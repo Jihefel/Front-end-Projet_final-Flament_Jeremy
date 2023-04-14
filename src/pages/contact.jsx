@@ -8,7 +8,6 @@ function Contact() {
   const textarea = useRef()
 
 
-
   return (
     <>
       <Head>
@@ -18,21 +17,23 @@ function Contact() {
       </Head>
       <Container>
         <h1 className="text-white text-6xl mb-5">Contactez-nous</h1>
-        <div id="textarea">
-          <div className="mb-2 block">
-            <Label htmlFor="comment" value="Votre message" />
+        <form>
+          <div id="textarea">
+            <div className="mb-2 block">
+              <Label htmlFor="comment" value="Votre message" />
+            </div>
+            <Textarea
+              id="comment"
+              placeholder="Votre message..."
+              required={true}
+              rows={4}
+              ref={textarea}
+            />
           </div>
-          <Textarea
-            id="comment"
-            placeholder="Votre message..."
-            required={true}
-            rows={4}
-            ref={textarea}
-          />
-        </div>
-        <Button color="purple" className="w-auto mx-auto mt-3">
-          Envoyer &thinsp;<BiMailSend />
-        </Button>
+          <Button color="purple" className="w-auto mx-auto mt-3" type="submit">
+            Envoyer &thinsp;<BiMailSend />
+          </Button>
+        </form>
       </Container>
     </>
   );

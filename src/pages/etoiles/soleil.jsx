@@ -1,10 +1,19 @@
 import Image from "next/image";
 import { Container, Row, Col } from "react-bootstrap";
 import sun2 from "public/assets/images/soleil/sun2.jpg";
+import Head from "next/head";
 
 export default function Soleil(props) {
   const data = props.data
   return (
+    <>
+    <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+          Le Soleil
+        </title>
+      </Head>
     <section className="section-soleil-details">
       <Container>
         <h1 className="titre-sec-soleil titre">Le Soleil</h1>
@@ -73,6 +82,7 @@ export default function Soleil(props) {
         </Row>
       </Container>
     </section>
+    </>
   );
 }
 

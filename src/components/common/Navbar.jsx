@@ -56,7 +56,7 @@ function NavBar() {
   return (
     <>
       <Navbar fluid={false} rounded={true} className={titilliumWeb.className}>
-        <Navbar.Brand href="https://flowbite.com/">
+        <Navbar.Brand>
           <Image
             src={logo}
             className="mr-3 h-6 sm:h-9"
