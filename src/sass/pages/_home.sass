@@ -79,5 +79,13 @@
   100%
     filter: drop-shadow(15px 0px rgba(0,0,0,0.4))
 
-@media (max-width: 650px)
+@media (max-width: 768px)
+  .gallery.home
+    display: flex
+    flex-wrap: wrap
+    [data-testid="carousel"], .img-hors-carousel
+      max-height: 200px
+    img
+      animation: mouvement 15s infinite alternate
+
 
