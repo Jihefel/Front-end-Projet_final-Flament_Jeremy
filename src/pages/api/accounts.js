@@ -15,6 +15,9 @@ export default function handler(request, response) {
     const password = request.body.password;
     const isConnected = request.body.isConnected
     const favorites = request.body.favorites
+    const message = request.body.message
+
+    console.log(message)
 
     const filePath = path.join(process.cwd(), "src", "data", "comptes.json");
     const fileData = fs.readFileSync(filePath);
@@ -84,7 +87,7 @@ export default function handler(request, response) {
         email: email,
         password: password, // Stocke le mot de passe haché
         isConnected: false,
-        message: {},
+        messages: [],
         favorites: []
       };
 
